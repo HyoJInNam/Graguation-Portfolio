@@ -52,6 +52,13 @@ void Camera::SetPosition(const XMVECTOR & pos)
 	this->UpdateViewMatrix();
 }
 
+void Camera::SetPosition(const XMFLOAT3 & pos)
+{
+	this->pos = pos;
+	this->posVector = XMLoadFloat3(&this->pos);
+	this->UpdateViewMatrix();
+}
+
 void Camera::SetPosition(float x, float y, float z)
 {
 	this->pos = XMFLOAT3(x, y, z);
@@ -63,6 +70,15 @@ void Camera::AdjustPosition(const XMVECTOR & pos)
 {
 	this->posVector += pos;
 	XMStoreFloat3(&this->pos, this->posVector);
+	this->UpdateViewMatrix();
+}
+
+void Camera::AdjustPosition(const XMFLOAT3 & pos)
+{
+	this->pos.x += pos.y;
+	this->pos.y += pos.y;
+	this->pos.z += pos.z;
+	this->posVector = XMLoadFloat3(&this->pos);
 	this->UpdateViewMatrix();
 }
 
@@ -82,6 +98,13 @@ void Camera::SetRotation(const XMVECTOR & rot)
 	this->UpdateViewMatrix();
 }
 
+void Camera::SetRotation(const XMFLOAT3 & rot)
+{
+	this->rot = rot;
+	this->rotVector = XMLoadFloat3(&this->rot);
+	this->UpdateViewMatrix();
+}
+
 void Camera::SetRotation(float x, float y, float z)
 {
 	this->rot = XMFLOAT3(x, y, z);
@@ -96,6 +119,15 @@ void Camera::AdjustRotation(const XMVECTOR & rot)
 	this->UpdateViewMatrix();
 }
 
+void Camera::AdjustRotation(const XMFLOAT3 & rot)
+{
+	this->rot.x += rot.x;
+	this->rot.y += rot.y;
+	this->rot.z += rot.z;
+	this->rotVector = XMLoadFloat3(&this->rot);
+	this->UpdateViewMatrix();
+}
+
 void Camera::AdjustRotation(float x, float y, float z)
 {
 	this->rot.x += x;
@@ -107,9 +139,9 @@ void Camera::AdjustRotation(float x, float y, float z)
 
 void Camera::SetLookAtPos(XMFLOAT3 lookAtPos)
 {
-	// Verify that look at pos is not the same as cam pos.They cannot be the same as that wouldn't make sense and would result in undefined behavior.
-		if (lookAtPos.x == this->pos.x && lookAtPos.y == this->pos.y && lookAtPos.z == this->pos.z)
-			return;
+	//Verify that look at pos is not the same as cam pos. They cannot be the same as that wouldn't make sense and would result in undefined behavior.
+	if (lookAtPos.x == this->pos.x && lookAtPos.y == this->pos.y && lookAtPos.z == this->pos.z)
+		return;
 
 	lookAtPos.x = this->pos.x - lookAtPos.x;
 	lookAtPos.y = this->pos.y - lookAtPos.y;
@@ -155,6 +187,7 @@ const XMVECTOR & Camera::GetLeftVector()
 
 void Camera::UpdateViewMatrix() //Updates view matrix and also updates the movement vectors
 {
+	//Calculate camera rotation matrix
 	XMMATRIX camRotationMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z);
 	//Calculate unit vector of cam target based off camera forward value transformed by cam rotation matrix
 	XMVECTOR camTarget = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, camRotationMatrix);

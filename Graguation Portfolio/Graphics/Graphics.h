@@ -1,19 +1,16 @@
 #pragma once
 #include "AdapterReader.h"
 #include "Shaders.h"
-#include "Vertex.h"
 #include <SpriteBatch.h>
 #include <SpriteFont.h>
 #include <WICTextureLoader.h>
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
-#include "ConstantBuffer.h"
 #include "Camera.h"
 #include "..\\Timer.h"
 
 #include <imgui.h>
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
+#include "Model.h"
 
 class Graphics
 {
@@ -22,7 +19,7 @@ public:
 	void RenderFrame();
 
 	Camera camera;
-
+	Model model;
 
 
 private:
@@ -35,16 +32,14 @@ private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 
-
+	int windowWidth = 0;
+	int windowHeight = 0;
 
 private:
 	VertexShader vertexshader;
 	PixelShader pixelshader;
 	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
 	ConstantBuffer<CB_PS_pixelshader> cb_ps_pixelshader;
-
-	VertexBuffer<Vertex> vertexBuffer;
-	IndexBuffer indicesBuffer;
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
@@ -53,24 +48,20 @@ private:
 
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState;
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState_CullFront;
+
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendState;
 
 private:
 	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
 	std::unique_ptr<DirectX::SpriteFont> spriteFont;
 
+	Timer fpsTimer;
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pinkTexture;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> grassTexture;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pavementTexture;
-
-
-private:
-	int windowWidth = 0;
-	int windowHeight = 0;
-	Timer fpsTimer;
 
 };
 
