@@ -209,17 +209,17 @@ bool Graphics::InitializeShaders()
 	if (IsDebuggerPresent() == TRUE)
 	{
 #ifdef _DEBUG //Debug Mode
-#ifdef _WIN64 //x64
-		shaderfolder = L"..\\x64\\Debug\\";
-#else  //x86 (Win32)
-		shaderfolder = L"..\\Debug\\";
-#endif
-#else //Release Mode
-#ifdef _WIN64 //x64
-		shaderfolder = L"..\\x64\\Release\\";
-#else  //x86 (Win32)
-		shaderfolder = L"..\\Release\\";
-#endif
+	#ifdef _WIN64 //x64
+			shaderfolder = L"..\\x64\\Debug\\";
+	#else  //x86 (Win32)
+			shaderfolder = L"..\\Debug\\";
+	#endif
+	#else //Release Mode
+	#ifdef _WIN64 //x64
+			shaderfolder = L"..\\x64\\Release\\";
+	#else  //x86 (Win32)
+			shaderfolder = L"..\\Release\\";
+	#endif
 #endif
 	}
 
@@ -261,9 +261,12 @@ bool Graphics::InitializeScene()
 
 		hr = this->cb_ps_pixelshader.Initialize(this->device.Get(), this->deviceContext.Get());
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
-
-		if (!model.Initialize(this->device.Get(), this->deviceContext.Get(), this->pavementTexture.Get(), this->cb_vs_vertexshader))
+		
+		
+		
+		if (!model.Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", this->device.Get(), this->deviceContext.Get(), this->grassTexture.Get(), this->cb_vs_vertexshader))
 			return false;
+
 
 
 		camera.SetPosition(0.0f, 0.0f, -2.0f);
