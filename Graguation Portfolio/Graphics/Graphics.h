@@ -10,7 +10,7 @@
 #include <ImGui/imgui.h>
 #include <ImGui/imgui_impl_dx11.h>
 #include <ImGui/imgui_impl_win32.h>
-#include "Model.h"
+#include "RenderableGameObject.h"
 
 class Graphics
 {
@@ -19,7 +19,7 @@ public:
 	void RenderFrame();
 
 	Camera camera;
-	Model model;
+	RenderableGameObject  gameObject;
 
 
 private:
