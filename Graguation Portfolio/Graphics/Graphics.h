@@ -10,7 +10,9 @@
 #include <ImGui/imgui.h>
 #include <ImGui/imgui_impl_dx11.h>
 #include <ImGui/imgui_impl_win32.h>
+
 #include "RenderableGameObject.h"
+#include "Light.h"
 
 class Graphics
 {
@@ -20,6 +22,7 @@ public:
 
 	Camera camera;
 	RenderableGameObject  gameObject;
+	Light light;
 
 
 private:
@@ -38,8 +41,9 @@ private:
 private:
 	VertexShader vertexshader;
 	PixelShader pixelshader;
+	PixelShader pixelshader_nolight;
 	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
-	ConstantBuffer<CB_PS_pixelshader> cb_ps_pixelshader;
+	ConstantBuffer<CB_PS_light> cb_ps_light;
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;

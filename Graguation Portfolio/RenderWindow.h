@@ -10,6 +10,7 @@ public:
 	bool ProcessMessages();
 	HWND GetHWND() const;
 	~RenderWindow();
+
 private:
 	void RegisterWindowClass();
 	HWND handle = NULL; //Handle to this window

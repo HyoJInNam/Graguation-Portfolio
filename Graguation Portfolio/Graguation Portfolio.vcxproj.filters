@@ -87,6 +87,9 @@
     <ClCompile Include="Graphics\RenderableGameObject.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Light.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorLogger.h">
@@ -167,12 +170,18 @@
     <ClInclude Include="Graphics\RenderableGameObject.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Light.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\vertexshader.hlsl">
       <Filter>리소스 파일</Filter>
     </FxCompile>
     <FxCompile Include="Shader\pixelshader.hlsl">
+      <Filter>리소스 파일</Filter>
+    </FxCompile>
+    <FxCompile Include="pixelshader_nolight.hlsl">
       <Filter>리소스 파일</Filter>
     </FxCompile>
   </ItemGroup>

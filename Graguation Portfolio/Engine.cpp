@@ -20,35 +20,34 @@ bool Engine::ProcessMessages()
 
 void Engine::Update()
 {
-	float dt = timer.GetMilisecondsElapsed();
+	float dt = (float)timer.GetMilisecondsElapsed();
 	timer.Restart();
 
-	while (!keyboard.CharBufferIsEmpty())
-	{
-		unsigned char ch = keyboard.ReadChar();
-		//Debug output
-		{
-			std::string outmsg = "Char: ";
-			outmsg += ch;
-			outmsg += "\n";
-			OutputDebugStringA(outmsg.c_str());
-		}
-	}
-
-	while (!keyboard.KeyBufferIsEmpty())
-	{
-		KeyboardEvent kbe = keyboard.ReadKey();
-		unsigned char keycode = kbe.GetKeyCode();
-		//Debug output
-		{
-			std::string outmsg = "";
-			if (kbe.IsPress()) outmsg += "Key press: ";
-			if (kbe.IsRelease()) outmsg += "Key release: ";
-			outmsg += keycode;
-			outmsg += "\n";
-			OutputDebugStringA(outmsg.c_str()); 
-		}
-	}
+	//while (!keyboard.CharBufferIsEmpty())
+	//{
+	//	unsigned char ch = keyboard.ReadChar();
+	//	//Debug output
+	//	{
+	//		std::string outmsg = "Char: ";
+	//		outmsg += ch;
+	//		outmsg += "\n";
+	//		OutputDebugStringA(outmsg.c_str());
+	//	}
+	//}
+	//while (!keyboard.KeyBufferIsEmpty())
+	//{
+	//	KeyboardEvent kbe = keyboard.ReadKey();
+	//	unsigned char keycode = kbe.GetKeyCode();
+	//	//Debug output
+	//	{
+	//		std::string outmsg = "";
+	//		if (kbe.IsPress()) outmsg += "Key press: ";
+	//		if (kbe.IsRelease()) outmsg += "Key release: ";
+	//		outmsg += keycode;
+	//		outmsg += "\n";
+	//		OutputDebugStringA(outmsg.c_str()); 
+	//	}
+	//}
 
 	while (!mouse.EventBufferIsEmpty())
 	{
@@ -62,16 +61,9 @@ void Engine::Update()
 		}
 	}
 
-
 	//this->gfx.gameObject.AdjustRotation(0.0f, 0.001f*dt, 0.0f);
 
 	float cameraSpeed = 0.006f;
-
-
-	if (keyboard.KeyIsPressed(VK_SHIFT))
-	{
-		cameraSpeed = 0.3f;
-	}
 
 	if (keyboard.KeyIsPressed('W'))
 	{
@@ -89,16 +81,21 @@ void Engine::Update()
 	{
 		this->gfx.camera.AdjustPosition(this->gfx.camera.GetRightVector() * cameraSpeed * dt);
 	}
-	if (keyboard.KeyIsPressed(VK_SPACE))
+	if (keyboard.KeyIsPressed('E'))
 	{
 		this->gfx.camera.AdjustPosition(0.0f, cameraSpeed * dt, 0.0f);
 	}
-	if (keyboard.KeyIsPressed('Z'))
+	if (keyboard.KeyIsPressed('Q'))
 	{
 		this->gfx.camera.AdjustPosition(0.0f, -cameraSpeed * dt, 0.0f);
 	}
-
-
+	if (keyboard.KeyIsPressed('L'))
+	{
+		XMVECTOR lightPosition = this->gfx.camera.GetPositionVector();
+		lightPosition += this->gfx.camera.GetForwardVector();
+		this->gfx.light.SetPosition(lightPosition);
+		this->gfx.light.SetRotation(this->gfx.camera.GetRotationFloat3());
+	}
 }
 
 void Engine::RenderFrame()

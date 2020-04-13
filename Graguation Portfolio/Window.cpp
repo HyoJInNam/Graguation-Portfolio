@@ -16,7 +16,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 	Engine engine;
-	if (engine.Initialize(hInstance, "Graduation Portfolio DirectX11 VS 2017", "MyWindowClass", 800, 600))
+	if (engine.Initialize(hInstance, "Graduation Portfolio DirectX11 VS 2017", "MyWindowClass", 1600, 900))
 	{
 		while (engine.ProcessMessages() == true)
 		{

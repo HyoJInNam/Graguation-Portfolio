@@ -1,9 +1,0 @@
-﻿  Engine.cpp
-c:\users\남효진\source\repos\graguation portfolio\graguation portfolio\engine.cpp(23): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Camera.cpp
-  Graphics.cpp
-  RenderWindow.cpp
-  Window.cpp
-  WindowContainer.cpp
-  코드를 생성하고 있습니다...
-  Graguation Portfolio.vcxproj -> C:\Users\남효진\source\repos\Graguation Portfolio\Debug\Graguation Portfolio.exe
