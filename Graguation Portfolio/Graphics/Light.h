@@ -1,7 +1,7 @@
 #pragma once
-#include "RenderableGameObject.h"
+#include "GameObject.h"
 
-class Light : public RenderableGameObject
+class Light : public GameObject
 {
 public:
 	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, ConstantBuffer<CB_VS_vertexshader> & cb_vs_vertexshader);

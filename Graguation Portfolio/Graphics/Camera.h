@@ -1,8 +1,9 @@
 #pragma once
-#include "GameObject.h"
+#include "Transform.h"
+#include "DirectXSetup/ImGuiClass.h"
 using namespace DirectX;
 
-class Camera : public GameObject
+class Camera : public Transform, ImGuiContainer
 {
 public:
 	Camera();

@@ -1,5 +1,5 @@
 #pragma once
-#include "Mesh.h"
+#include "Material/Mesh.h"
 
 
 using namespace DirectX;

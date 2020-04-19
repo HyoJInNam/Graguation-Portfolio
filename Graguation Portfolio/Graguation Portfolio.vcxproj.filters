@@ -22,11 +22,17 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{e87efd69-7819-4606-84a1-fad8c8efe5eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics\Material">
+      <UniqueIdentifier>{f424fd96-3dd7-4340-8253-b4e23d206757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\D3DSetUp">
+      <UniqueIdentifier>{f7435dfd-2802-406a-a4a8-ac49a8c5235f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Material\InputAssembler">
+      <UniqueIdentifier>{5271498f-002a-44cc-adf7-9978ca9a7449}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ErrorLogger.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="RenderWindow.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -51,50 +57,56 @@
     <ClCompile Include="Keyboard\KeyboardEvent.cpp">
       <Filter>Keyboard</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Shaders.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Graphics.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\AdapterReader.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Camera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Model.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\DirectXSetup\DirectXClass.cpp">
+      <Filter>Graphics\D3DSetUp</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Mesh.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\DirectXSetup\AdapterReader.cpp">
+      <Filter>Graphics\D3DSetUp</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GameObject.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\Material\Color.cpp">
+      <Filter>Graphics\Material</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Color.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\Material\Texture.cpp">
+      <Filter>Graphics\Material</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Texture.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\Material\Shaders.cpp">
+      <Filter>Graphics\Material</Filter>
     </ClCompile>
-    <ClCompile Include="StringHelper.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Graphics\Material\Mesh.cpp">
+      <Filter>Graphics\Material</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\RenderableGameObject.cpp">
+    <ClCompile Include="Graphics\Camera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Light.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Model.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Transform.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GameObject.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\ErrorLogger.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Systems\StringHelper.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\DirectXSetup\ImGuiClass.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ErrorLogger.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="RenderWindow.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -116,62 +128,71 @@
     <ClInclude Include="Mouse\MouseEvent.h">
       <Filter>Mouse</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Vertex.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Shaders.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Graphics.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\AdapterReader.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\VertexBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\IndexBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\ConstantBuffer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\ConstantBufferTypes.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Camera.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="COMException.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="Graphics\DirectXSetup\DirectXClass.h">
+      <Filter>Graphics\D3DSetUp</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\DirectXSetup\AdapterReader.h">
+      <Filter>Graphics\D3DSetUp</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\Color.h">
+      <Filter>Graphics\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\Texture.h">
+      <Filter>Graphics\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\Shaders.h">
+      <Filter>Graphics\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\InputAssembler\ConstantBuffer.h">
+      <Filter>Graphics\Material\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\InputAssembler\ConstantBufferTypes.h">
+      <Filter>Graphics\Material\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\InputAssembler\IndexBuffer.h">
+      <Filter>Graphics\Material\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\InputAssembler\Vertex.h">
+      <Filter>Graphics\Material\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\InputAssembler\VertexBuffer.h">
+      <Filter>Graphics\Material\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material\Mesh.h">
+      <Filter>Graphics\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Camera.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Light.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Model.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Mesh.h">
+    <ClInclude Include="Graphics\Transform.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\GameObject.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Color.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Texture.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="StringHelper.h">
+    <ClInclude Include="Systems\COMException.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\RenderableGameObject.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Systems\ErrorLogger.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Light.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Systems\StringHelper.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\DirectXSetup\ImGuiClass.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -70,20 +70,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(DirecTXInc);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Systems;$(DirecTXInc);$(IncludePath)</IncludePath>
     <LibraryPath>$(DirectXLib)\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>$(DirectXLib)\x64;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(DirecTXInc);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Systems;$(DirecTXInc);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(DirecTXInc);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Systems;$(DirecTXInc);$(IncludePath)</IncludePath>
     <LibraryPath>$(DirectXLib)\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>$(DirectXLib)\x64;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(DirecTXInc);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Systems;$(DirecTXInc);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -185,55 +185,59 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\DirectXSetup\DirectXClass.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="ErrorLogger.cpp" />
-    <ClCompile Include="Graphics\Color.cpp" />
-    <ClCompile Include="Graphics\GameObject.cpp" />
-    <ClCompile Include="Graphics\AdapterReader.cpp" />
+    <ClCompile Include="Graphics\DirectXSetup\ImGuiClass.cpp" />
+    <ClCompile Include="Systems\ErrorLogger.cpp" />
+    <ClCompile Include="Graphics\Material\Color.cpp" />
+    <ClCompile Include="Graphics\Transform.cpp" />
+    <ClCompile Include="Graphics\DirectXSetup\AdapterReader.cpp" />
     <ClCompile Include="Graphics\Camera.cpp" />
     <ClCompile Include="Graphics\Graphics.cpp" />
     <ClCompile Include="Graphics\Light.cpp" />
-    <ClCompile Include="Graphics\Mesh.cpp" />
+    <ClCompile Include="Graphics\Material\Mesh.cpp" />
     <ClCompile Include="Graphics\Model.cpp" />
-    <ClCompile Include="Graphics\Shaders.cpp" />
-    <ClCompile Include="Graphics\Texture.cpp" />
+    <ClCompile Include="Graphics\Material\Shaders.cpp" />
+    <ClCompile Include="Graphics\Material\Texture.cpp" />
     <ClCompile Include="Keyboard\KeyboardClass.cpp" />
     <ClCompile Include="Keyboard\KeyboardEvent.cpp" />
     <ClCompile Include="Mouse\MouseClass.cpp" />
     <ClCompile Include="Mouse\MouseEvent.cpp" />
-    <ClCompile Include="Graphics\RenderableGameObject.cpp" />
+    <ClCompile Include="Graphics\GameObject.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
-    <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="Systems\StringHelper.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="COMException.h" />
+    <ClInclude Include="Graphics\DirectXSetup\ImGuiClass.h" />
+    <ClInclude Include="Systems\COMException.h" />
+    <ClInclude Include="Graphics\DirectXSetup\DirectXClass.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="ErrorLogger.h" />
-    <ClInclude Include="Graphics\AdapterReader.h" />
+    <ClInclude Include="Systems\ErrorLogger.h" />
+    <ClInclude Include="Graphics\DirectXSetup\AdapterReader.h" />
     <ClInclude Include="Graphics\Camera.h" />
-    <ClInclude Include="Graphics\Color.h" />
-    <ClInclude Include="Graphics\ConstantBuffer.h" />
-    <ClInclude Include="Graphics\ConstantBufferTypes.h" />
-    <ClInclude Include="Graphics\GameObject.h" />
+    <ClInclude Include="Graphics\Material\Color.h" />
+    <ClInclude Include="Graphics\Material\InputAssembler\ConstantBuffer.h" />
+    <ClInclude Include="Graphics\Material\InputAssembler\ConstantBufferTypes.h" />
+    <ClInclude Include="Graphics\Transform.h" />
     <ClInclude Include="Graphics\Graphics.h" />
     <ClInclude Include="Graphics\Light.h" />
-    <ClInclude Include="Graphics\Mesh.h" />
+    <ClInclude Include="Graphics\Material\Mesh.h" />
     <ClInclude Include="Graphics\Model.h" />
-    <ClInclude Include="Graphics\Shaders.h" />
-    <ClInclude Include="Graphics\Texture.h" />
-    <ClInclude Include="Graphics\Vertex.h" />
-    <ClInclude Include="Graphics\IndexBuffer.h" />
+    <ClInclude Include="Graphics\Material\Shaders.h" />
+    <ClInclude Include="Graphics\Material\Texture.h" />
+    <ClInclude Include="Graphics\Material\InputAssembler\Vertex.h" />
+    <ClInclude Include="Graphics\Material\InputAssembler\IndexBuffer.h" />
     <ClInclude Include="Keyboard\KeyboardClass.h" />
     <ClInclude Include="Keyboard\KeyboardEvent.h" />
     <ClInclude Include="Mouse\MouseClass.h" />
     <ClInclude Include="Mouse\MouseEvent.h" />
-    <ClInclude Include="Graphics\RenderableGameObject.h" />
+    <ClInclude Include="Graphics\GameObject.h" />
     <ClInclude Include="RenderWindow.h" />
-    <ClInclude Include="Graphics\VertexBuffer.h" />
-    <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="Graphics\Material\InputAssembler\VertexBuffer.h" />
+    <ClInclude Include="Systems\StringHelper.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WindowContainer.h" />
   </ItemGroup>
