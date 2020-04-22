@@ -2,6 +2,8 @@
 #include "WindowContainer.h"
 #include "Timer.h"
 
+class Transform;
+
 class Engine : WindowContainer
 {
 public:

@@ -12,8 +12,8 @@ bool RenderWindow::Initialize(WindowContainer * pWindowContainer, HINSTANCE hIns
 
 	this->RegisterWindowClass();
 
-	int centerScreenX = GetSystemMetrics(SM_CXSCREEN) / 2 - this->width / 2;
-	int centerScreenY = GetSystemMetrics(SM_CYSCREEN) / 2 - this->height / 2;
+	int centerScreenX = (GetSystemMetrics(SM_CXSCREEN) - this->width) / 2;
+	int centerScreenY = (GetSystemMetrics(SM_CYSCREEN) - this->height) / 2;
 
 	RECT wr; //Widow Rectangle
 	wr.left = centerScreenX;

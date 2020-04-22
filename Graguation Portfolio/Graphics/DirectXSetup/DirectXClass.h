@@ -3,7 +3,7 @@
 
 class DirectXClass
 {
-protected:
+public:
 	bool InitializeDirect(HWND hwnd, int width, int height);
 	void RenderDirect();
 	void PresentBuffer();
@@ -17,11 +17,10 @@ private:
 	BOOL Sampler();
 	BOOL Blend();
 
-protected:
+public:
 	int windowWidth = 0;
 	int windowHeight = 0;
 
-protected:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;

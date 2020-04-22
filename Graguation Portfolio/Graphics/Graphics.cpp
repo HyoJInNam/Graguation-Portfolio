@@ -3,20 +3,20 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 {
 	this->fpsTimer.Start();
 
-	if (!InitializeDirect(hwnd, width, height))
+	if (!DRXC->InitializeDirect(hwnd, width, height))
 		return false;
 
-	spriteBatch = std::make_unique<DirectX::SpriteBatch>(this->deviceContext.Get());
-	spriteFont = std::make_unique<DirectX::SpriteFont>(this->device.Get(), L"Data\\Fonts\\comic_sans_ms_16.spritefont");
+	spriteBatch = std::make_unique<DirectX::SpriteBatch>(DRXC->deviceContext.Get());
+	spriteFont = std::make_unique<DirectX::SpriteFont>(DRXC->device.Get(), L"Data\\Fonts\\comic_sans_ms_16.spritefont");
 
-	if (!InitializeShaders(this->device))
+	if (!SDC->InitializeShaders(DRXC->device))
 		return false;
 
 	if (!InitializeScene())
 		return false;
 
 
-	InitializeImGUI(hwnd, this->device, this->deviceContext);
+	IMGUIC->InitializeImGUI(hwnd, DRXC->device, DRXC->deviceContext);
 
 
 	return true;
@@ -24,25 +24,16 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 
 void Graphics::RenderFrame()
 {
-	this->cb_ps_light.data.dynamicLightColor = light.lightColor;
-	this->cb_ps_light.data.dynamicLightStrength = light.lightStrength;
-	this->cb_ps_light.data.dynamicLightPosition = light.GetPositionFloat3();
-	this->cb_ps_light.data.dynamicLightAttenuation_a = light.attenuation_a;
-	this->cb_ps_light.data.dynamicLightAttenuation_b = light.attenuation_b;
-	this->cb_ps_light.data.dynamicLightAttenuation_c = light.attenuation_c;
-	this->cb_ps_light.ApplyChanges();
-	this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_light.GetAddressOf());
-	
-	RenderDirect();
-	RenderShader(this->deviceContext);
+
+	DRXC->RenderDirect();
+	DirectionLight->getComponent<Light>()->Render(DRXC->deviceContext.Get());
+	SDC->RenderShader(DRXC->deviceContext);
 	{
-		this->gameObject.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
-	}
-	{
-		this->light.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
+		DirectionLight->getComponent<Renderer>()->Draw(MainCamera->getComponent<Camera>()->GetTransformation());
+		gameObject->getComponent<Renderer>()->Draw(MainCamera->getComponent<Camera>()->GetTransformation());
 	}
 
-	//Draw Text
+	//Draw Text->
 	static int fpsCounter = 0;
 	static std::string fpsString = "FPS: 0";
 	fpsCounter += 1;
@@ -58,58 +49,45 @@ void Graphics::RenderFrame()
 
 	static int counter = 0;
 	
-	FrameImGUI();
-
-	ImGui::Begin("Camera");
-	XMFLOAT3 pos = camera.GetPositionFloat3();
-	ImGui::DragFloat3("position", (float*)&pos, 0.1f, 0.0f, 1.0f);
-	camera.SetPosition(pos);
-	ImGui::End();
-
-	ImGui::Begin("Light Controls");
-	ImGui::DragFloat3("Ambient Light Color", &this->cb_ps_light.data.ambientLightColor.x, 0.01f, 0.0f, 1.0f);
-	ImGui::DragFloat("Ambient Light Strength", &this->cb_ps_light.data.ambientLightStrength, 0.01f, 0.0f, 1.0f);
-	ImGui::DragFloat("Dynamic Light Attenuation A", &this->light.attenuation_a, 0.01f, 0.1f, 10.0f);
-	ImGui::DragFloat("Dynamic Light Attenuation B", &this->light.attenuation_b, 0.01f, 0.0f, 10.0f);
-	ImGui::DragFloat("Dynamic Light Attenuation C", &this->light.attenuation_c, 0.01f, 0.0f, 10.0f);
-	ImGui::End();
-
-	RenderImGUI();
-	PresentBuffer();
+	IMGUIC->FrameImGUI();
+	MainCamera->getComponent<Camera>()->Container();
+	DirectionLight->getComponent<Light>()->Container();
+	IMGUIC->RenderImGUI();
+	DRXC->PresentBuffer();
 }
 
 bool Graphics::InitializeScene()
 {
 	try
 	{
+		DirectionLight = new GameObject("DirectionLight", nullptr, "DirectionLight");
+		DirectionLight->addComponent<Light>();
+		DirectionLight->addComponent<Renderer>();
+		if (!DirectionLight->getComponent<Light>()->Initialize(DRXC->device.Get(), DRXC->deviceContext.Get()))
+			return false;
+
+
+		MainCamera = new GameObject("MainCamera", nullptr, "MainCamera");
+		MainCamera->addComponent<Camera>();
+		MainCamera->getComponent<Transform>()->SetPosition(0.0f, 0.0f, -2.0f);
+		MainCamera->getComponent<Camera>()->SetProjectionValues(90.0f, static_cast<float>(DRXC->windowWidth) / static_cast<float>(DRXC->windowHeight), 0.1f, 3000.0f);
+	
 		//Load Texture
-		HRESULT hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\seamless_grass.jpg", nullptr, grassTexture.GetAddressOf());
+		HRESULT hr = DirectX::CreateWICTextureFromFile(DRXC->device.Get(), L"Data\\Textures\\seamless_grass.jpg", nullptr, grassTexture.GetAddressOf());
 		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
-		hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\pinksquare.jpg", nullptr, pinkTexture.GetAddressOf());
+		hr = DirectX::CreateWICTextureFromFile(DRXC->device.Get(), L"Data\\Textures\\pinksquare.jpg", nullptr, pinkTexture.GetAddressOf());
 		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
-		hr = DirectX::CreateWICTextureFromFile(this->device.Get(), L"Data\\Textures\\seamless_pavement.jpg", nullptr, pavementTexture.GetAddressOf());
+		hr = DirectX::CreateWICTextureFromFile(DRXC->device.Get(), L"Data\\Textures\\seamless_pavement.jpg", nullptr, pavementTexture.GetAddressOf());
 		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
-		//Initialize Constant Buffer(s)
-		hr = this->cb_vs_vertexshader.Initialize(this->device.Get(), this->deviceContext.Get());
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
-		hr = this->cb_ps_light.Initialize(this->device.Get(), this->deviceContext.Get());
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
-
-		this->cb_ps_light.data.ambientLightColor = XMFLOAT3(1.0f, 1.0f, 1.0f);
-		this->cb_ps_light.data.ambientLightStrength = 1.0f;
-
-		if (!gameObject.Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
+		gameObject = new GameObject("gameObject", nullptr, "gameObject");
+		gameObject->addComponent<Renderer>();
+		if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", DRXC->device.Get(), DRXC->deviceContext.Get(), DirectionLight->getComponent<Light>()->GetVertexShader()))
 			return false;
 
-		if (!light.Initialize(this->device.Get(), this->deviceContext.Get(), this->cb_vs_vertexshader))
-			return false;
-
-		camera.SetPosition(0.0f, 0.0f, -2.0f);
-		camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) / static_cast<float>(windowHeight), 0.1f, 3000.0f);
 	}
 	catch (COMException & exception)
 	{

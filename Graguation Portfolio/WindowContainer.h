@@ -14,8 +14,8 @@ protected:
 	RenderWindow	render_window;
 	KeyboardClass	keyboard;
 	MouseClass		mouse;
-	Graphics gfx;
-private:
+	Graphics		gfx;
+private:	
 
 };
 

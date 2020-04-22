@@ -22,14 +22,17 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{e87efd69-7819-4606-84a1-fad8c8efe5eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Material">
-      <UniqueIdentifier>{f424fd96-3dd7-4340-8253-b4e23d206757}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics\D3DSetUp">
       <UniqueIdentifier>{f7435dfd-2802-406a-a4a8-ac49a8c5235f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\Material\InputAssembler">
+    <Filter Include="Graphics\Component">
+      <UniqueIdentifier>{ae4a401e-c035-4525-9be5-c3f09675eefb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Component\InputAssembler">
       <UniqueIdentifier>{5271498f-002a-44cc-adf7-9978ca9a7449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{068d87d0-23b3-449c-a9c2-d865205c45da}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,41 +72,47 @@
     <ClCompile Include="Graphics\DirectXSetup\AdapterReader.cpp">
       <Filter>Graphics\D3DSetUp</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Material\Color.cpp">
-      <Filter>Graphics\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material\Texture.cpp">
-      <Filter>Graphics\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material\Shaders.cpp">
-      <Filter>Graphics\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Material\Mesh.cpp">
-      <Filter>Graphics\Material</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Camera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Light.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Model.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\Component\Transform.cpp">
+      <Filter>Graphics\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Transform.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\Component\InputAssembler\Mesh.cpp">
+      <Filter>Graphics\Component\InputAssembler</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\GameObject.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Graphics\Component\InputAssembler\Color.cpp">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Component\InputAssembler\Texture.cpp">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Component\InputAssembler\Model.cpp">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Component\Component.cpp">
+      <Filter>Graphics\Component</Filter>
     </ClCompile>
     <ClCompile Include="Systems\ErrorLogger.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Systems\StringHelper.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\DirectXSetup\ImGuiClass.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Graphics\D3DSetUp</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shaders.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Component\Renderer.cpp">
+      <Filter>Graphics\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Component\GameObject.cpp">
+      <Filter>Graphics\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,59 +149,65 @@
     <ClInclude Include="Graphics\DirectXSetup\AdapterReader.h">
       <Filter>Graphics\D3DSetUp</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Material\Color.h">
-      <Filter>Graphics\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\Texture.h">
-      <Filter>Graphics\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\Shaders.h">
-      <Filter>Graphics\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\InputAssembler\ConstantBuffer.h">
-      <Filter>Graphics\Material\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\InputAssembler\ConstantBufferTypes.h">
-      <Filter>Graphics\Material\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\InputAssembler\IndexBuffer.h">
-      <Filter>Graphics\Material\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\InputAssembler\Vertex.h">
-      <Filter>Graphics\Material\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\InputAssembler\VertexBuffer.h">
-      <Filter>Graphics\Material\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Material\Mesh.h">
-      <Filter>Graphics\Material</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Camera.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Light.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Model.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Graphics\Component\InputAssembler\ConstantBuffer.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Transform.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Graphics\Component\InputAssembler\ConstantBufferTypes.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\GameObject.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Graphics\Component\InputAssembler\IndexBuffer.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\InputAssembler\Vertex.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\InputAssembler\VertexBuffer.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\Transform.h">
+      <Filter>Graphics\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\InputAssembler\Mesh.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\InputAssembler\Color.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\InputAssembler\Texture.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
     </ClInclude>
     <ClInclude Include="Systems\COMException.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\ErrorLogger.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Systems\StringHelper.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\DirectXSetup\ImGuiClass.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Graphics\D3DSetUp</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shaders.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\Renderer.h">
+      <Filter>Graphics\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\InputAssembler\Model.h">
+      <Filter>Graphics\Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\Component.h">
+      <Filter>Graphics\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\GameObject.h">
+      <Filter>Graphics\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,8 @@
 #include "Camera.h"
+#include "Component/GameObject.h"
 
-Camera::Camera()
+Camera::Camera(GameObject* go): Component(go)
 {
-	this->pos = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	this->posVector = XMLoadFloat3(&this->pos);
-	this->rot = XMFLOAT3(0.0f, 0.0f, 0.0f);
-	this->rotVector = XMLoadFloat3(&this->rot);
 	this->UpdateMatrix();
 }
 
@@ -13,6 +10,15 @@ void Camera::SetProjectionValues(float fovDegrees, float aspectRatio, float near
 {
 	float fovRadians = (fovDegrees / 360.0f) * XM_2PI;
 	this->projectionMatrix = XMMatrixPerspectiveFovLH(fovRadians, aspectRatio, nearZ, farZ);
+}
+
+void Camera::Container()
+{
+	ImGui::Begin("Camera");
+	XMFLOAT3 pos = this->transform->GetPositionFloat3();
+	ImGui::DragFloat3("position", (float*)&pos, 0.1f, 0.0f, 1.0f);
+	this->transform->SetPosition(pos);
+	ImGui::End();
 }
 
 const XMMATRIX & Camera::GetViewMatrix() const
@@ -25,14 +31,21 @@ const XMMATRIX & Camera::GetProjectionMatrix() const
 	return this->projectionMatrix;
 }
 
+const XMMATRIX & Camera::GetTransformation() const
+{
+	return viewMatrix * projectionMatrix;
+}
+
 void Camera::UpdateMatrix() 
 {
-	XMMATRIX camRotationMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z);
-	XMVECTOR camTarget = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, camRotationMatrix);
+	XMFLOAT3 rot = this->transform->GetRotationFloat3();
+	XMMATRIX camRotationMatrix = XMMatrixRotationRollPitchYaw(rot.x, rot.y, rot.z);
+	XMVECTOR camTarget = XMVector3TransformCoord(DEFAULT_FORWARD_VECTOR, camRotationMatrix);
 
-	camTarget += this->posVector;
-	XMVECTOR upDir = XMVector3TransformCoord(this->DEFAULT_UP_VECTOR, camRotationMatrix);
-	this->viewMatrix = XMMatrixLookAtLH(this->posVector, camTarget, upDir);
+	XMVECTOR posVector = this->transform->GetRotationVector();
+	camTarget += posVector;
+	XMVECTOR upDir = XMVector3TransformCoord(DEFAULT_UP_VECTOR, camRotationMatrix);
+	this->viewMatrix = XMMatrixLookAtLH(posVector, camTarget, upDir);
 
-	this->UpdateDirectionVectors();
+	this->transform->UpdateDirectionVectors();
 }

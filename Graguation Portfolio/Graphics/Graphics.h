@@ -1,42 +1,31 @@
 #pragma once
 #include "DirectXSetup/DirectXClass.h"
 #include "DirectXSetup/ImGuiClass.h"
-#include <ImGui/imgui.h>
-#include <ImGui/imgui_impl_dx11.h>
-#include <ImGui/imgui_impl_win32.h>
 
-#include "Material/Shaders.h"
+#include "Shaders.h"
 
 #include <SpriteBatch.h>
 #include <SpriteFont.h>
 #include <WICTextureLoader.h>
 
-#include "Camera.h"
 #include "..\\Timer.h"
+#include "Component/GameObject.h"
 
 
-#include "GameObject.h"
-#include "Light.h"
+class Renderer;
+class Camera;
+class Light;
 
-class Graphics : protected DirectXClass, ImGuiClass, ShaderClass
+class Graphics
 {
 public:
+	Graphics(): DRXC(new DirectXClass()), IMGUIC(new ImGuiClass()), SDC(new ShaderClass()){};
 	bool Initialize(HWND hwnd, int width, int height);
 	void RenderFrame();
 
-	Camera camera;
-	GameObject  gameObject;
-	Light light;
-
-
-private:
-	bool InitializeScene();
-
-
-private:
-	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
-	ConstantBuffer<CB_PS_light> cb_ps_light;
-
+	GameObject* MainCamera;
+	GameObject* DirectionLight;
+	GameObject* gameObject;
 
 private:
 	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
@@ -44,10 +33,19 @@ private:
 
 	Timer fpsTimer;
 
+
 private:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pinkTexture;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> grassTexture;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pavementTexture;
+
+
+
+private:
+	bool InitializeScene();
+	DirectXClass* DRXC;
+	ImGuiClass * IMGUIC;
+	ShaderClass * SDC;
 
 };
 

@@ -9,6 +9,7 @@ bool ImGuiClass::InitializeImGUI(HWND hwnd, Microsoft::WRL::ComPtr<ID3D11Device>
 	ImGui_ImplWin32_Init(hwnd);
 	ImGui_ImplDX11_Init(device.Get(), deviceContext.Get());
 	ImGui::StyleColorsDark();
+	return true;
 }
 
 
@@ -24,14 +25,4 @@ void ImGuiClass::RenderImGUI()
 {
 	ImGui::Render();
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-}
-
-void ImGuiClass::Begin(const char name)
-{
-	ImGui::Begin(name);
-}
-
-void ImGuiClass::End()
-{
-	ImGui::End();
 }
