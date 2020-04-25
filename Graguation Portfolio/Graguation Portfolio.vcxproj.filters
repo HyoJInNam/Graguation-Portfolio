@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Keyboard">
       <UniqueIdentifier>{9c79f33a-7c69-4355-8a0a-568a5687e81d}</UniqueIdentifier>
     </Filter>
@@ -22,17 +18,21 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{e87efd69-7819-4606-84a1-fad8c8efe5eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics\D3DSetUp">
-      <UniqueIdentifier>{f7435dfd-2802-406a-a4a8-ac49a8c5235f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Component">
-      <UniqueIdentifier>{ae4a401e-c035-4525-9be5-c3f09675eefb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics\Component\InputAssembler">
-      <UniqueIdentifier>{5271498f-002a-44cc-adf7-9978ca9a7449}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Systems">
       <UniqueIdentifier>{068d87d0-23b3-449c-a9c2-d865205c45da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\DirectXSetup">
+      <UniqueIdentifier>{f7435dfd-2802-406a-a4a8-ac49a8c5235f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{ae4a401e-c035-4525-9be5-c3f09675eefb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\InputAssembler">
+      <UniqueIdentifier>{5271498f-002a-44cc-adf7-9978ca9a7449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -67,28 +67,10 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\DirectXSetup\DirectXClass.cpp">
-      <Filter>Graphics\D3DSetUp</Filter>
+      <Filter>Graphics\DirectXSetup</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\DirectXSetup\AdapterReader.cpp">
-      <Filter>Graphics\D3DSetUp</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Component\Transform.cpp">
-      <Filter>Graphics\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Component\InputAssembler\Mesh.cpp">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Component\InputAssembler\Color.cpp">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Component\InputAssembler\Texture.cpp">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Component\InputAssembler\Model.cpp">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Component\Component.cpp">
-      <Filter>Graphics\Component</Filter>
+      <Filter>Graphics\DirectXSetup</Filter>
     </ClCompile>
     <ClCompile Include="Systems\ErrorLogger.cpp">
       <Filter>Systems</Filter>
@@ -97,21 +79,39 @@
       <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\DirectXSetup\ImGuiClass.cpp">
-      <Filter>Graphics\D3DSetUp</Filter>
+      <Filter>Graphics\DirectXSetup</Filter>
     </ClCompile>
     <ClCompile Include="Graphics\Shaders.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Component\Renderer.cpp">
-      <Filter>Graphics\Component</Filter>
+    <ClCompile Include="Component\InputAssembler\Color.cpp">
+      <Filter>Component\InputAssembler</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Component\GameObject.cpp">
-      <Filter>Graphics\Component</Filter>
+    <ClCompile Include="Component\InputAssembler\Mesh.cpp">
+      <Filter>Component\InputAssembler</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Component\Camera.cpp">
-      <Filter>Graphics</Filter>
+    <ClCompile Include="Component\InputAssembler\Model.cpp">
+      <Filter>Component\InputAssembler</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Component\Light.cpp">
+    <ClCompile Include="Component\InputAssembler\Texture.cpp">
+      <Filter>Component\InputAssembler</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Camera.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Light.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Renderer.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Transform.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\GameObject.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,37 +144,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\DirectXSetup\DirectXClass.h">
-      <Filter>Graphics\D3DSetUp</Filter>
+      <Filter>Graphics\DirectXSetup</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\DirectXSetup\AdapterReader.h">
-      <Filter>Graphics\D3DSetUp</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\ConstantBuffer.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\ConstantBufferTypes.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\IndexBuffer.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\Vertex.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\VertexBuffer.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\Transform.h">
-      <Filter>Graphics\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\Mesh.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\Color.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\Texture.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
+      <Filter>Graphics\DirectXSetup</Filter>
     </ClInclude>
     <ClInclude Include="Systems\COMException.h">
       <Filter>Systems</Filter>
@@ -186,40 +159,69 @@
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\DirectXSetup\ImGuiClass.h">
-      <Filter>Graphics\D3DSetUp</Filter>
+      <Filter>Graphics\DirectXSetup</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Shaders.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Component\Renderer.h">
-      <Filter>Graphics\Component</Filter>
+    <ClInclude Include="Component\InputAssembler\Color.h">
+      <Filter>Component\InputAssembler</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Component\InputAssembler\Model.h">
-      <Filter>Graphics\Component\InputAssembler</Filter>
+    <ClInclude Include="Component\InputAssembler\ConstantBuffer.h">
+      <Filter>Component\InputAssembler</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Component\Component.h">
-      <Filter>Graphics\Component</Filter>
+    <ClInclude Include="Component\InputAssembler\ConstantBufferTypes.h">
+      <Filter>Component\InputAssembler</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Component\GameObject.h">
-      <Filter>Graphics\Component</Filter>
+    <ClInclude Include="Component\InputAssembler\IndexBuffer.h">
+      <Filter>Component\InputAssembler</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Component\Camera.h">
-      <Filter>Graphics</Filter>
+    <ClInclude Include="Component\InputAssembler\Mesh.h">
+      <Filter>Component\InputAssembler</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Component\Light.h">
+    <ClInclude Include="Component\InputAssembler\Model.h">
+      <Filter>Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InputAssembler\Texture.h">
+      <Filter>Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InputAssembler\Vertex.h">
+      <Filter>Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\InputAssembler\VertexBuffer.h">
+      <Filter>Component\InputAssembler</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Camera.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Light.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Renderer.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Transform.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\GameObject.h">
       <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\vertexshader.hlsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Shader\pixelshader.hlsl">
-      <Filter>리소스 파일</Filter>
+      <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="pixelshader_nolight.hlsl">
-      <Filter>리소스 파일</Filter>
+    <FxCompile Include="Shader\pixelshader_nolight.hlsl">
+      <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\pixelshader_nolight.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

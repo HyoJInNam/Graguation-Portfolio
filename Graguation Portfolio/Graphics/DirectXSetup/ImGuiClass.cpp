@@ -1,4 +1,5 @@
 #include "ImGuiClass.h"
+#include "GameObject.h"
 
 
 bool ImGuiClass::InitializeImGUI(HWND hwnd, Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext)

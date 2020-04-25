@@ -6,7 +6,7 @@
 #include <ImGui/imgui_impl_win32.h>
 
 #include <vector>
-#include "../Component/GameObject.h"
+using namespace std;
 
 class GameObject;
 

@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Engine" Collapsed="true">
+    <Position X="3.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAEAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RenderWindow" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABEAgQQAQAAIAAYBAAAEAAAAAgICAIAAAAA=</HashCode>
+      <FileName>RenderWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer" Collapsed="true">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAACAAAABgAAAAAAAAAAAgAAABIAAAAAAEAAA=</HashCode>
+      <FileName>Timer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WindowContainer" Collapsed="true">
+    <Position X="3.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAggAACAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WindowContainer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyboardClass" Collapsed="true">
+    <Position X="15.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQoiAAACAEQAAACAAAAQAAwAAIAgQCAAAAAAFAAAQA=</HashCode>
+      <FileName>Keyboard\KeyboardClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyboardEvent" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAgAAAAAAAAAAAAAAgUAAAAAAABAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Keyboard\KeyboardEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseClass" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAEICAQAAAgAEEAAEAwAAHIAAAABAABgAAQIaAA=</HashCode>
+      <FileName>Mouse\MouseClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseEvent" Collapsed="true">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAgAAAgAAAABAAEAAABgAAAAYAA=</HashCode>
+      <FileName>Mouse\MouseEvent.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphics" Collapsed="true">
+    <Position X="3.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAUAAAAAAAQAARGEAAAAAAAAAAAAAAhAAAAAAAAA=</HashCode>
+      <FileName>Graphics\Graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VertexShader" Collapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAAAQAAAAAAAAAAAAAAAAACAABAAEAAACA=</HashCode>
+      <FileName>Graphics\Shaders.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelShader" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAIAAAAQAAAAAAAAAAAAAAAAAAAABAAEAAAAA=</HashCode>
+      <FileName>Graphics\Shaders.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShaderClass" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAAAAAKAA=</HashCode>
+      <FileName>Graphics\Shaders.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hCAAIKAAAAAABERECACAABACCABsAAACBAAEAAZAAAA=</HashCode>
+      <FileName>Graphics\GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ImGuiClass" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAgAgAQAAA=</HashCode>
+      <FileName>Graphics\DirectXSetup\ImGuiClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DirectXClass" Collapsed="true">
+    <Position X="1.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CACAgAASAAgEABAAEgBAAAAAAAAAAUAQIQJAAAAABIA=</HashCode>
+      <FileName>Graphics\DirectXSetup\DirectXClass.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdapterData" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAQAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graphics\DirectXSetup\AdapterReader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AdapterReader" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Graphics\DirectXSetup\AdapterReader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="COMException" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAACAAAAAAAAAAQA=</HashCode>
+      <FileName>Systems\COMException.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ErrorLogger" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Systems\ErrorLogger.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StringHelper" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAEAAAAE=</HashCode>
+      <FileName>Systems\StringHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Component" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAgAAAAAAAAAEAAAAIABAAAAAAAA=</HashCode>
+      <FileName>Component\Component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAACAAAAAAAAAAAgAAACQAAAgAIAAAAAAAAAA=</HashCode>
+      <FileName>Component\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Light" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAQAAADgAQAAAQAAAgAAEAAAAAAAJBAAAAMBAAA=</HashCode>
+      <FileName>Component\Light.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Renderer" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAQAAAAAAAAEAAAAAAAAAIBCAAAAIAAA=</HashCode>
+      <FileName>Component\Renderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Transform" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABBBAARAAAAEIAAAAAICAJSKAAAAQigBAABEAsAoAQA=</HashCode>
+      <FileName>Component\Transform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Color" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAkgAQAAAAAQAAAAAAAAAAAAAhqAEAAAA=</HashCode>
+      <FileName>Component\InputAssembler\Color.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConstantBuffer&lt;T&gt;" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQBAAAAAAAKAAAAAAQAAAAFQAAAAAAA=</HashCode>
+      <FileName>Component\InputAssembler\ConstantBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mesh" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAAAgAAAAAAAAAAABgAAQAAAQAAAAAAEAA=</HashCode>
+      <FileName>Component\InputAssembler\Mesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model" Collapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAACAAAQAwAAAAAIAAAAgAAAASACBAAAAAAAAkA=</HashCode>
+      <FileName>Component\InputAssembler\Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Texture" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAgAAABAgEAgAoAAAAAgAA=</HashCode>
+      <FileName>Component\InputAssembler\Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IndexBuffer" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQBAAAAAEAAAAQAAAAEAAAFAAAAAAAA=</HashCode>
+      <FileName>Component\InputAssembler\IndexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VertexBuffer&lt;T&gt;" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQBAAQAAAAEAEAAAAQAAAAFgAAAAEAA=</HashCode>
+      <FileName>Component\InputAssembler\VertexBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="MousePoint" Collapsed="true">
+    <Position X="13.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Mouse\MouseEvent.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CB_VS_vertexshader" Collapsed="true">
+    <Position X="11.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Component\InputAssembler\ConstantBufferTypes.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CB_PS_light" Collapsed="true">
+    <Position X="10" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAACBAAAAAAAAAAAACAAAAAAAYAE=</HashCode>
+      <FileName>Component\InputAssembler\ConstantBufferTypes.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Vertex" Collapsed="true">
+    <Position X="15.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAIgAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Component\InputAssembler\Vertex.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="BYTE" Collapsed="true">
+    <Position X="10" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Component\InputAssembler\Color.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="TextureStorageType" Collapsed="true">
+    <Position X="10" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAkEhAAA=</HashCode>
+      <FileName>Component\InputAssembler\Texture.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="맑은 고딕" Size="9" />
+</ClassDiagram>

@@ -70,20 +70,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Graguation Portfolio\Graphics\Component;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Component;$(SolutionDir)Graguation Portfolio\Graphics;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Graguation Portfolio\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LibraryPath>$(SolutionDir)Graguation Portfolio\Lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Graguation Portfolio\Graphics\Component;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Component;$(SolutionDir)Graguation Portfolio\Graphics;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)Graguation Portfolio\Graphics\Component;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Component;$(SolutionDir)Graguation Portfolio\Graphics;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Graguation Portfolio\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LibraryPath>$(SolutionDir)Graguation Portfolio\Lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)Graguation Portfolio\Graphics\Component;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Graguation Portfolio\Component;$(SolutionDir)Graguation Portfolio\Graphics;$(SolutionDir)Graguation Portfolio\Systems;$(SolutionDir)Graguation Portfolio\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -185,27 +185,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics\Component\GameObject.cpp" />
-    <ClCompile Include="Graphics\Component\Component.cpp" />
+    <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Graphics\DirectXSetup\DirectXClass.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Graphics\DirectXSetup\ImGuiClass.cpp" />
+    <ClCompile Include="Graphics\GameObject.cpp" />
+    <ClCompile Include="Component\Transform.cpp" />
     <ClCompile Include="Systems\ErrorLogger.cpp" />
-    <ClCompile Include="Graphics\Component\InputAssembler\Color.cpp" />
-    <ClCompile Include="Graphics\Component\Transform.cpp" />
+    <ClCompile Include="Component\InputAssembler\Color.cpp" />
     <ClCompile Include="Graphics\DirectXSetup\AdapterReader.cpp" />
-    <ClCompile Include="Graphics\Component\Camera.cpp" />
+    <ClCompile Include="Component\Camera.cpp" />
     <ClCompile Include="Graphics\Graphics.cpp" />
-    <ClCompile Include="Graphics\Component\Light.cpp" />
-    <ClCompile Include="Graphics\Component\InputAssembler\Mesh.cpp" />
-    <ClCompile Include="Graphics\Component\InputAssembler\Model.cpp" />
+    <ClCompile Include="Component\Light.cpp" />
+    <ClCompile Include="Component\InputAssembler\Mesh.cpp" />
+    <ClCompile Include="Component\InputAssembler\Model.cpp" />
     <ClCompile Include="Graphics\Shaders.cpp" />
-    <ClCompile Include="Graphics\Component\InputAssembler\Texture.cpp" />
+    <ClCompile Include="Component\InputAssembler\Texture.cpp" />
     <ClCompile Include="Keyboard\KeyboardClass.cpp" />
     <ClCompile Include="Keyboard\KeyboardEvent.cpp" />
     <ClCompile Include="Mouse\MouseClass.cpp" />
     <ClCompile Include="Mouse\MouseEvent.cpp" />
-    <ClCompile Include="Graphics\Component\Renderer.cpp" />
+    <ClCompile Include="Component\Renderer.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
     <ClCompile Include="Systems\StringHelper.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -213,43 +213,39 @@
     <ClCompile Include="WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Graphics\Component\GameObject.h" />
-    <ClInclude Include="Graphics\Component\Component.h" />
+    <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Graphics\DirectXSetup\ImGuiClass.h" />
+    <ClInclude Include="Graphics\GameObject.h" />
+    <ClInclude Include="Component\Transform.h" />
     <ClInclude Include="Systems\COMException.h" />
     <ClInclude Include="Graphics\DirectXSetup\DirectXClass.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Systems\ErrorLogger.h" />
     <ClInclude Include="Graphics\DirectXSetup\AdapterReader.h" />
-    <ClInclude Include="Graphics\Component\Camera.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\Color.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\ConstantBuffer.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\ConstantBufferTypes.h" />
-    <ClInclude Include="Graphics\Component\Transform.h" />
+    <ClInclude Include="Component\Camera.h" />
+    <ClInclude Include="Component\InputAssembler\Color.h" />
+    <ClInclude Include="Component\InputAssembler\ConstantBuffer.h" />
+    <ClInclude Include="Component\InputAssembler\ConstantBufferTypes.h" />
     <ClInclude Include="Graphics\Graphics.h" />
-    <ClInclude Include="Graphics\Component\Light.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\Mesh.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\Model.h" />
+    <ClInclude Include="Component\Light.h" />
+    <ClInclude Include="Component\InputAssembler\Mesh.h" />
+    <ClInclude Include="Component\InputAssembler\Model.h" />
     <ClInclude Include="Graphics\Shaders.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\Texture.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\Vertex.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\IndexBuffer.h" />
+    <ClInclude Include="Component\InputAssembler\Texture.h" />
+    <ClInclude Include="Component\InputAssembler\Vertex.h" />
+    <ClInclude Include="Component\InputAssembler\IndexBuffer.h" />
     <ClInclude Include="Keyboard\KeyboardClass.h" />
     <ClInclude Include="Keyboard\KeyboardEvent.h" />
     <ClInclude Include="Mouse\MouseClass.h" />
     <ClInclude Include="Mouse\MouseEvent.h" />
-    <ClInclude Include="Graphics\Component\Renderer.h" />
+    <ClInclude Include="Component\Renderer.h" />
     <ClInclude Include="RenderWindow.h" />
-    <ClInclude Include="Graphics\Component\InputAssembler\VertexBuffer.h" />
+    <ClInclude Include="Component\InputAssembler\VertexBuffer.h" />
     <ClInclude Include="Systems\StringHelper.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WindowContainer.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="pixelshader_nolight.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
-    </FxCompile>
     <FxCompile Include="Shader\pixelshader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
@@ -257,6 +253,8 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
     <FxCompile Include="Shader\pixelshader_nolight.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
@@ -275,7 +273,12 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

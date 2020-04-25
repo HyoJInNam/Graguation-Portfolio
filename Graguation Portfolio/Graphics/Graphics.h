@@ -1,6 +1,7 @@
 #pragma once
 #include "DirectXSetup/DirectXClass.h"
 #include "DirectXSetup/ImGuiClass.h"
+#include "GameObject.h"
 #include "Shaders.h"
 
 #include "..\\Timer.h"
@@ -13,10 +14,9 @@ class Renderer;
 class Camera;
 class Light;
 
-class Graphics
+class Graphics: public DirectXClass, ImGuiClass, ShaderClass
 {
 public:
-	Graphics(): DRXC(new DirectXClass()), IMGUIC(new ImGuiClass()), SDC(new ShaderClass()){};
 	bool Initialize(HWND hwnd, int width, int height);
 	void RenderFrame();
 
@@ -31,19 +31,14 @@ private:
 
 	Timer fpsTimer;
 
-
-private:
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pinkTexture;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> grassTexture;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pavementTexture;
+//private:
+//	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pinkTexture;
+//	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> grassTexture;
+//	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pavementTexture;
 
 
 
 private:
 	bool InitializeScene();
-	DirectXClass* DRXC;
-	ImGuiClass * IMGUIC;
-	ShaderClass * SDC;
-
 };
 

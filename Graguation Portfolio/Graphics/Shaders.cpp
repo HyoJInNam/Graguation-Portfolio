@@ -128,7 +128,7 @@ bool ShaderClass::InitializeShaders(Microsoft::WRL::ComPtr<ID3D11Device>&  devic
 	return true;
 }
 
-void ShaderClass::RenderShader(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext)
+void ShaderClass::RenderShader_Light(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext)
 {
 	deviceContext->IASetInputLayout(this->vertexshader.GetInputLayout());
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
