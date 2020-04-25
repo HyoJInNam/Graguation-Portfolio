@@ -57,7 +57,6 @@ void Graphics::RenderFrame()
 	Inspector(gameobjectList);	
 	RenderImGUI();
 	PresentBuffer();
-
 }
 
 bool Graphics::InitializeScene()

@@ -10,10 +10,6 @@
 #include <SpriteFont.h>
 #include <WICTextureLoader.h>
 
-class Renderer;
-class Camera;
-class Light;
-
 class Graphics: public DirectXClass, ImGuiClass, ShaderClass
 {
 public:
