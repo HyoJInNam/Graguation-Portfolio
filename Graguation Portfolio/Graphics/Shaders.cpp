@@ -134,6 +134,9 @@ void ShaderClass::RenderShader(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  dev
 	deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
+}
 
+void ShaderClass::RenderShader_noLight(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext)
+{
 	deviceContext->PSSetShader(pixelshader_nolight.GetShader(), NULL, 0);
 }

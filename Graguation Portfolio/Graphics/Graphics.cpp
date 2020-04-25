@@ -18,20 +18,21 @@ bool Graphics::Initialize(HWND hwnd, int width, int height)
 
 
 	IMGUIC->InitializeImGUI(hwnd, DRXC->device, DRXC->deviceContext);
-
-
 	return true;
 }
 
 void Graphics::RenderFrame()
 {
-	DRXC->RenderDirect();
 	DirectionLight->getComponent<Light>()->Render(DRXC->deviceContext.Get());
+	DRXC->RenderDirect();
 	SDC->RenderShader(DRXC->deviceContext);
 	Camera* camera = MainCamera->getComponent<Camera>();
 	{
-		DirectionLight->getComponent<Renderer>()->Render(camera->GetViewMatrix() * camera->GetProjectionMatrix());
 		gameObject->getComponent<Renderer>()->Render(camera->GetViewMatrix() * camera->GetProjectionMatrix());
+	}
+	{
+		SDC->RenderShader_noLight(DRXC->deviceContext);
+		DirectionLight->getComponent<Renderer>()->Render(camera->GetViewMatrix() * camera->GetProjectionMatrix());
 	}
 
 	//Draw Text->
@@ -51,26 +52,8 @@ void Graphics::RenderFrame()
 	static int counter = 0;
 	
 	IMGUIC->FrameImGUI();
-
-	ImGui::Begin("Hierarchy");
-	static int selected = -1;
-	for (int n = 0; n < gameobjectList.size(); n++)
-	{
-		if (ImGui::Selectable(gameobjectList[n]->getName().c_str(), selected == n)) selected = n;
-	}
-	ImGui::End();
-
-	ImGui::Begin("Inspector");
-	if (ImGui::BeginTabBar("Inspector"))
-	{
-		if (ImGui::BeginTabItem("Inspector"))
-		{
-			if(selected != -1)gameobjectList[selected]->inspector();
-			ImGui::EndTabItem();
-		}
-		ImGui::EndTabBar();
-	}
-	ImGui::End();
+	IMGUIC->Hierarchy(gameobjectList);
+	IMGUIC->Inspector(gameobjectList);	
 	IMGUIC->RenderImGUI();
 	DRXC->PresentBuffer();
 

@@ -22,9 +22,9 @@ private:
 	ConstantBuffer<CB_PS_light> cb_ps_light;
 
 private:
-	DirectX::XMFLOAT3 lightColor = DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f);
-	float lightStrength = 1.0f;
-	float attenuation_a = 1.0f;
-	float attenuation_b = 0.1f;
-	float attenuation_c = 0.1f;
+	DirectX::XMFLOAT3 lightColor;
+	float lightStrength;
+	float attenuation_a;
+	float attenuation_b;
+	float attenuation_c;
 };

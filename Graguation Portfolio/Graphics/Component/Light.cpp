@@ -1,10 +1,16 @@
 #include "Light.h"
+#include "../DirectXSetup/ImGuiClass.h"
 
 
 
 Light::Light(GameObject * go)
 	:Component(go)
 {
+	lightColor = DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f);
+	lightStrength = 1.0f;
+	attenuation_a = 1.0f;
+	attenuation_b = 0.1f;
+	attenuation_c = 0.1f;
 }
 
 ConstantBuffer<CB_VS_vertexshader>* Light::GetVertexShader()
@@ -27,6 +33,7 @@ void Light::Container()
 
 void Light::UpdateMatrix()
 {
+	gameobject->getComponent<Renderer>()->UpdateMatrix();
 }
 
 bool Light::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext)
@@ -40,7 +47,7 @@ bool Light::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContex
 
 	this->transform->SetPosition(0.0f, 0.0f, 0.0f);
 	this->transform->SetRotation(0.0f, 0.0f, 0.0f);
-	renderer->UpdateMatrix();
+	this->UpdateMatrix();
 	return true;
 }
 

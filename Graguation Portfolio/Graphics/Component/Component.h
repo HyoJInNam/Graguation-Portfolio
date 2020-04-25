@@ -2,20 +2,14 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 using namespace std;
-
-
-#include "../DirectXSetup/ImGuiClass.h"
-//using namespace DirectX;
-
 
 
 class GameObject;
 class Transform;
 
 
-class Component: public ImGuiEvent
+class Component
 {
 public:
 	Component(GameObject* gameobject);

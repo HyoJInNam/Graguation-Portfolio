@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "GameObject.h"
+#include "../DirectXSetup/ImGuiClass.h"
 
 Camera::Camera(GameObject* go): Component(go)
 {

@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "../DirectXSetup/ImGuiClass.h"
 
 vector<GameObject*> GameObject::gameObjects;
 

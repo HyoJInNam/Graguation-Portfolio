@@ -36,6 +36,7 @@ class ShaderClass
 public:
 	bool InitializeShaders(Microsoft::WRL::ComPtr<ID3D11Device>&  device);
 	void RenderShader(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
+	void RenderShader_noLight(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
 
 private:
 	VertexShader vertexshader;

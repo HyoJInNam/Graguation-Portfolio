@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include "../DirectXSetup/ImGuiClass.h"
 
 
 Renderer::Renderer(GameObject* go)

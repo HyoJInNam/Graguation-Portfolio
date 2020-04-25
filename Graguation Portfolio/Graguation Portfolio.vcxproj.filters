@@ -220,5 +220,6 @@
     <FxCompile Include="pixelshader_nolight.hlsl">
       <Filter>리소스 파일</Filter>
     </FxCompile>
+    <FxCompile Include="Shader\pixelshader_nolight.hlsl" />
   </ItemGroup>
 </Project>

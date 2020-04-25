@@ -4,8 +4,6 @@
 #include "Shaders.h"
 
 #include "..\\Timer.h"
-#include "Component/GameObject.h"
-
 
 #include <SpriteBatch.h>
 #include <SpriteFont.h>

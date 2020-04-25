@@ -1,5 +1,5 @@
 #include "Transform.h"
-
+#include "../DirectXSetup/ImGuiClass.h"
 
 Transform::Transform(GameObject* gameObject)
 	:Component(gameObject)
@@ -44,6 +44,7 @@ void Transform::Container()
 		ImGui::DragFloat3("position", (float*)&pos, 0.1f, -100.0f, 100.0f);
 		ImGui::DragFloat3("rotation", (float*)&rot, 0.1f, -360.0f, 36.0f);
 		ImGui::DragFloat3("scale", (float*)&scl, 0.1f, 0.0f, 1.0f);
+		this->UpdateMatrix();
 		ImGui::TreePop();
 	}
 }
