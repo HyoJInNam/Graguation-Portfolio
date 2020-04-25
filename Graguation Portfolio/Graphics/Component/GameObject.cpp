@@ -99,17 +99,15 @@ vector<GameObject*> GameObject::allFind(const string & path)
 }
 
 
-void GameObject::traverseStart()
+void GameObject::inspector()
 {
 	if (enabled == false) return;
 
+	ImGui::Text(name.c_str());
 	for (auto comp : components)
 	{
-		comp->start();
-	}
-	for (auto child : children)
-	{
-		child->traverseStart();
+		comp->Container();
+		ImGui::Separator();
 	}
 }
 
@@ -119,25 +117,11 @@ void GameObject::traverseUpdate()
 
 	for (auto comp : components)
 	{
-		comp->update();
+		if (comp == transform) continue;
+		comp->UpdateMatrix();
 	}
 	for (auto child : children)
 	{
 		child->traverseUpdate();
-
-	}
-}
-
-void GameObject::traverseLateUpdate()
-{
-	if (enabled == false) return;
-
-	for (auto comp : components)
-	{
-		comp->lateUpdate();
-	}
-	for (auto child : children)
-	{
-		child->traverseLateUpdate();
 	}
 }

@@ -8,39 +8,13 @@ Component::Component(GameObject *gameobject)
 	transform = gameobject->getTransform();
 }
 
+void Component::Container()
+{
+	if (!gameobject) assert("UI Container must be overridden." && 0);
+}
+
 void Component::UpdateMatrix()
 {
-	assert("UpdateMatrix must be overridden." && 0);
-}
-
-void Component::awake()
-{
-}
-
-void Component::onEnable()
-{
-}
-
-void Component::start()
-{
-}
-
-void Component::fixedUpdate()
-{
-}
-
-void Component::update()
-{
-}
-
-void Component::lateUpdate()
-{
-}
-
-void Component::onDisable()
-{
-}
-
-void Component::onDestroy()
-{
+	if(!gameobject) assert("UpdateMatrix must be overridden." && 0);
+	gameobject->traverseUpdate();
 }

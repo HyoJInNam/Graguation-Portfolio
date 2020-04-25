@@ -1,9 +1,10 @@
 #pragma once
+
 #include "Component.h"
 #include "Transform.h"
 #include "Renderer.h"
-#include "../Camera.h"
-#include "../Light.h"
+#include "Camera.h"
+#include "Light.h"
 
 
 class GameObject
@@ -18,6 +19,7 @@ protected:
 	GameObject* parent;
 	vector<GameObject*> children;
 
+public:
 	static vector<GameObject *> gameObjects;
 	
 
@@ -73,6 +75,7 @@ public:
 			ErrorLogger::Log(exception);
 			return nullptr;
 		}
+		return nullptr;
 	}
 
 	void setParent(GameObject* parent);
@@ -81,8 +84,6 @@ public:
 	GameObject* Find(const string& path);
 	static vector<GameObject*> allFind(const string& path);
 
-private:
-	void traverseStart();
+	void inspector();
 	void traverseUpdate();
-	void traverseLateUpdate();
 };

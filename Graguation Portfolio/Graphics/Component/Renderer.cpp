@@ -17,9 +17,18 @@ bool Renderer::Initialize(const std::string & filePath, ID3D11Device * device, I
 	return true;
 }
 
-void Renderer::Draw(const XMMATRIX & viewProjectionMatrix)
+void Renderer::Render(const XMMATRIX & viewProjectionMatrix)
 {
 	model.Draw(this->worldMatrix, viewProjectionMatrix);
+}
+
+void Renderer::Container()
+{
+	if (ImGui::TreeNode("Renderer"))
+	{
+		ImGui::Text("There is no content yet.");
+		ImGui::TreePop();
+	}
 }
 
 void Renderer::UpdateMatrix()

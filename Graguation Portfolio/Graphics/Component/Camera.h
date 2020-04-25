@@ -1,22 +1,18 @@
 #pragma once
-#include "DirectXSetup/ImGuiClass.h"
 #include "GameObject.h"
-using namespace DirectX;
 
-class Camera : public Component, ImGuiEvent
+class Camera : public Component
 {
 
 public:
 	Camera(GameObject* go);
+	virtual void Container() override;
+	virtual void UpdateMatrix() override;
+
 	void SetProjectionValues(float fovDegrees, float aspectRatio, float nearZ, float farZ);
-	virtual void Container();
 
 	const XMMATRIX & GetViewMatrix() const;
 	const XMMATRIX & GetProjectionMatrix() const;
-	const XMMATRIX & GetTransformation() const;
-
-private:
-	void UpdateMatrix() override;
 
 private:
 	XMMATRIX viewMatrix;

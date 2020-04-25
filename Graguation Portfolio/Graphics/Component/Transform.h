@@ -18,7 +18,8 @@ public:
 	Transform(GameObject* gameObject, const XMFLOAT3* position, const XMFLOAT3* rotation, const XMFLOAT3* scale);
 	Transform(GameObject* gameObject, const XMVECTOR& position, const XMVECTOR& rotation, const XMVECTOR& scale);
 	Transform(GameObject* gameObject, const XMFLOAT3& position, const XMFLOAT3& rotation, const XMFLOAT3& scale);
-	
+
+	virtual void Container() override;
 public:
 	const XMVECTOR & GetPositionVector() const;
 	const XMFLOAT3 & GetPositionFloat3() const;
@@ -53,7 +54,6 @@ public:
 	const XMVECTOR & GetBackwardVector(bool omitY = false);
 	const XMVECTOR & GetLeftVector(bool omitY = false);
 
-	virtual void UpdateMatrix();
 	void UpdateDirectionVectors();
 
 private:

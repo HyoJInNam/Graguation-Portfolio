@@ -26,7 +26,7 @@ void Mesh::Draw()
 {
 	UINT offset = 0;
 
-	for (int i = 0; i < textures.size(); i++)
+	for (unsigned int i = 0; i < textures.size(); i++)
 	{
 		if (textures[i].GetType() == aiTextureType::aiTextureType_DIFFUSE)
 		{

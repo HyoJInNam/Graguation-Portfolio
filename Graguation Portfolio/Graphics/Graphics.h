@@ -1,16 +1,15 @@
 #pragma once
 #include "DirectXSetup/DirectXClass.h"
 #include "DirectXSetup/ImGuiClass.h"
-
 #include "Shaders.h"
-
-#include <SpriteBatch.h>
-#include <SpriteFont.h>
-#include <WICTextureLoader.h>
 
 #include "..\\Timer.h"
 #include "Component/GameObject.h"
 
+
+#include <SpriteBatch.h>
+#include <SpriteFont.h>
+#include <WICTextureLoader.h>
 
 class Renderer;
 class Camera;
@@ -23,6 +22,7 @@ public:
 	bool Initialize(HWND hwnd, int width, int height);
 	void RenderFrame();
 
+	vector<GameObject*> gameobjectList;
 	GameObject* MainCamera;
 	GameObject* DirectionLight;
 	GameObject* gameObject;

@@ -37,6 +37,17 @@ Transform::Transform(GameObject * gameObject, const XMFLOAT3 & position, const X
 {
 }
 
+void Transform::Container()
+{
+	if (ImGui::TreeNode("Transform"))
+	{
+		ImGui::DragFloat3("position", (float*)&pos, 0.1f, -100.0f, 100.0f);
+		ImGui::DragFloat3("rotation", (float*)&rot, 0.1f, -360.0f, 36.0f);
+		ImGui::DragFloat3("scale", (float*)&scl, 0.1f, 0.0f, 1.0f);
+		ImGui::TreePop();
+	}
+}
+
 const XMVECTOR & Transform::GetPositionVector() const
 {
 	return this->posVector;
@@ -263,11 +274,6 @@ const XMVECTOR & Transform::GetLeftVector(bool omitY)
 		return this->vec_left_noY;
 	else
 		return this->vec_left;
-}
-
-void Transform::UpdateMatrix()
-{
-	//assert("UpdateMatrix must be overridden." && 0);
 }
 
 void Transform::UpdateDirectionVectors()

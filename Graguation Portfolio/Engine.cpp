@@ -22,7 +22,6 @@ void Engine::Update()
 {
 	float dt = (float)timer.GetMilisecondsElapsed();
 	timer.Restart();
-	static Transform * mainCameraTransform = this->gfx.MainCamera->getTransform();
 
 	//while (!keyboard.CharBufferIsEmpty())
 	//{
@@ -50,6 +49,7 @@ void Engine::Update()
 	//	}
 	//}
 
+	Transform * mainCameraTransform = this->gfx.MainCamera->getTransform();
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
@@ -68,7 +68,6 @@ void Engine::Update()
 
 	if (keyboard.KeyIsPressed('W'))
 	{
-		
 		mainCameraTransform->AdjustPosition(mainCameraTransform->GetForwardVector() * cameraSpeed * dt);
 	}
 	if (keyboard.KeyIsPressed('S'))

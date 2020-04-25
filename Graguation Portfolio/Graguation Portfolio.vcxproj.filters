@@ -72,12 +72,6 @@
     <ClCompile Include="Graphics\DirectXSetup\AdapterReader.cpp">
       <Filter>Graphics\D3DSetUp</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Camera.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Light.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Component\Transform.cpp">
       <Filter>Graphics\Component</Filter>
     </ClCompile>
@@ -114,6 +108,12 @@
     <ClCompile Include="Graphics\Component\GameObject.cpp">
       <Filter>Graphics\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Component\Camera.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Component\Light.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderWindow.h">
@@ -148,12 +148,6 @@
     </ClInclude>
     <ClInclude Include="Graphics\DirectXSetup\AdapterReader.h">
       <Filter>Graphics\D3DSetUp</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Camera.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Light.h">
-      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Component\InputAssembler\ConstantBuffer.h">
       <Filter>Graphics\Component\InputAssembler</Filter>
@@ -208,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="Graphics\Component\GameObject.h">
       <Filter>Graphics\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\Camera.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Component\Light.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

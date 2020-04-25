@@ -1,8 +1,7 @@
 #pragma once
 #include "GameObject.h"
-#include "DirectXSetup/ImGuiClass.h"
 
-class Light : public Component, ImGuiEvent
+class Light : public Component
 {
 public:
 	Light(GameObject* go);
@@ -10,8 +9,9 @@ public:
 
 public:
 	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext);
-	void Container();
 	void Render(ID3D11DeviceContext * deviceContext);
+	virtual void Container() override;
+	virtual void UpdateMatrix() override;
 
 private:
 	BOOL InitializeBuffer(ID3D11Device * device, ID3D11DeviceContext * deviceContext);

@@ -14,13 +14,19 @@ ConstantBuffer<CB_VS_vertexshader>* Light::GetVertexShader()
 
 void Light::Container()
 {
-	ImGui::Begin("Light Controls");
-	ImGui::DragFloat3("Ambient Light Color", &this->cb_ps_light.data.ambientLightColor.x, 0.01f, 0.0f, 1.0f);
-	ImGui::DragFloat("Ambient Light Strength", &this->cb_ps_light.data.ambientLightStrength, 0.01f, 0.0f, 1.0f);
-	ImGui::DragFloat("Dynamic Light Attenuation A", &this->attenuation_a, 0.01f, 0.1f, 10.0f);
-	ImGui::DragFloat("Dynamic Light Attenuation B", &this->attenuation_b, 0.01f, 0.0f, 10.0f);
-	ImGui::DragFloat("Dynamic Light Attenuation C", &this->attenuation_c, 0.01f, 0.0f, 10.0f);
-	ImGui::End();
+	if (ImGui::TreeNode("Light"))
+	{
+		ImGui::DragFloat3("Ambient Light Color", &this->cb_ps_light.data.ambientLightColor.x, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Ambient Light Strength", &this->cb_ps_light.data.ambientLightStrength, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Dynamic Light Attenuation A", &this->attenuation_a, 0.01f, 0.1f, 10.0f);
+		ImGui::DragFloat("Dynamic Light Attenuation B", &this->attenuation_b, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat("Dynamic Light Attenuation C", &this->attenuation_c, 0.01f, 0.0f, 10.0f);
+		ImGui::TreePop();
+	}
+}
+
+void Light::UpdateMatrix()
+{
 }
 
 bool Light::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext)
