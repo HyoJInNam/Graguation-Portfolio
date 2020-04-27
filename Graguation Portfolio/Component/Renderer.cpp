@@ -28,7 +28,17 @@ void Renderer::Container()
 {
 	if (ImGui::TreeNode("Renderer"))
 	{
-		ImGui::Text("There is no content yet.");
+		ImGui::Text("file Name");
+		ImGui::SameLine();
+		ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x);
+
+		if (GOR_file_toString.size() != GOR_file_toChar.size()) {
+			for (auto file : GOR_file_toString)
+				GOR_file_toChar.push_back(file.first.c_str());
+		}
+		ImGui::Combo("combo", &item_current, GOR_file_toChar.data(), GOR_file_toChar.size());
+		ImGui::PopItemWidth();
+
 		ImGui::TreePop();
 	}
 }

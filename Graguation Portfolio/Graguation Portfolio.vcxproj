@@ -191,6 +191,7 @@
     <ClCompile Include="Graphics\DirectXSetup\ImGuiClass.cpp" />
     <ClCompile Include="Graphics\GameObject.cpp" />
     <ClCompile Include="Component\Transform.cpp" />
+    <ClCompile Include="Include\ImGuiFileDialog\ImGuiFileDialog.cpp" />
     <ClCompile Include="Systems\ErrorLogger.cpp" />
     <ClCompile Include="Component\InputAssembler\Color.cpp" />
     <ClCompile Include="Graphics\DirectXSetup\AdapterReader.cpp" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Component\Renderer.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
     <ClCompile Include="Systems\StringHelper.cpp" />
+    <ClCompile Include="Component\Terrain.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowContainer.cpp" />
@@ -217,6 +219,9 @@
     <ClInclude Include="Graphics\DirectXSetup\ImGuiClass.h" />
     <ClInclude Include="Graphics\GameObject.h" />
     <ClInclude Include="Component\Transform.h" />
+    <ClInclude Include="Include\ImGuiFileDialog\dirent.h" />
+    <ClInclude Include="Include\ImGuiFileDialog\ImGuiFileDialog.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Systems\COMException.h" />
     <ClInclude Include="Graphics\DirectXSetup\DirectXClass.h" />
     <ClInclude Include="Engine.h" />
@@ -242,6 +247,7 @@
     <ClInclude Include="RenderWindow.h" />
     <ClInclude Include="Component\InputAssembler\VertexBuffer.h" />
     <ClInclude Include="Systems\StringHelper.h" />
+    <ClInclude Include="Component\Terrain.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WindowContainer.h" />
   </ItemGroup>

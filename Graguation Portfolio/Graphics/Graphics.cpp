@@ -54,7 +54,9 @@ void Graphics::RenderFrame()
 	//IMGUIC
 	FrameImGUI();
 	Hierarchy(gameobjectList);
+	Project();
 	Inspector(gameobjectList);	
+	DebugConsol();
 	RenderImGUI();
 	PresentBuffer();
 }

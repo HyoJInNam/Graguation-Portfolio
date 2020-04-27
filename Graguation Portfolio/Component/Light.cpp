@@ -49,7 +49,6 @@ bool Light::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContex
 	this->transform->SetPosition(0.0f, 0.0f, 0.0f);
 	this->transform->SetRotation(0.0f, 0.0f, 0.0f);
 	this->UpdateMatrix();
-	SAFE_DELETE(renderer);
 	return true;
 }
 

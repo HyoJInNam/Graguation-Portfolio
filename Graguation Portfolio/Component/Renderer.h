@@ -15,7 +15,10 @@ public:
 	Model model;
 
 
-protected:
-
+private:
 	XMMATRIX worldMatrix = XMMatrixIdentity();
+	int item_current = 0;
+
+	// GameObject Renderable File
+	vector<const char*> GOR_file_toChar;
 };

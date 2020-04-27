@@ -114,6 +114,12 @@
     <ClCompile Include="Graphics\GameObject.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Terrain.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\ImGuiFileDialog\ImGuiFileDialog.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderWindow.h">
@@ -208,6 +214,18 @@
     </ClInclude>
     <ClInclude Include="Graphics\GameObject.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Terrain.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ImGuiFileDialog\ImGuiFileDialog.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ImGuiFileDialog\dirent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
