@@ -120,6 +120,12 @@
     <ClCompile Include="Include\ImGuiFileDialog\ImGuiFileDialog.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Component\Sprite.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component\Canvas.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RenderWindow.h">
@@ -227,6 +233,12 @@
     <ClInclude Include="resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Component\Sprite.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\Canvas.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shader\vertexshader.hlsl">
@@ -238,6 +250,14 @@
     <FxCompile Include="Shader\pixelshader_nolight.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+    <FxCompile Include="Shader\pixelshader_2d.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\vertexshader_2d.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Shader\pixelshader_Terrain.hlsl" />
+    <FxCompile Include="Shader\vertexshader_Terrain.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

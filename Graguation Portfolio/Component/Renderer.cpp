@@ -8,9 +8,9 @@ Renderer::Renderer(GameObject* go)
 {
 }
 
-bool Renderer::Initialize(const std::string & filePath, ID3D11Device * device, ID3D11DeviceContext * deviceContext, ConstantBuffer<CB_VS_vertexshader>* cb_vs_vertexshader)
+bool Renderer::Initialize(const std::string & filePath, ID3D11Device * device, ID3D11DeviceContext * deviceContext, Light* light)
 {
-	if (!model.Initialize(filePath, device, deviceContext, cb_vs_vertexshader))
+	if (!model.Initialize(filePath, device, deviceContext, light->GetVertexShader()))
 		return false;
 
 	this->transform->SetPosition(0.0f, 0.0f, 0.0f);
@@ -18,12 +18,6 @@ bool Renderer::Initialize(const std::string & filePath, ID3D11Device * device, I
 	this->UpdateMatrix();
 	return true;
 }
-
-void Renderer::Render(const XMMATRIX & viewProjectionMatrix)
-{
-	model.Draw(this->worldMatrix, viewProjectionMatrix);
-}
-
 void Renderer::Container()
 {
 	if (ImGui::TreeNode("Renderer"))
@@ -47,6 +41,12 @@ void Renderer::UpdateMatrix()
 {
 	XMFLOAT3 pos = this->transform->GetPositionFloat3();
 	XMFLOAT3 rot = this->transform->GetRotationFloat3();
-	this->worldMatrix = XMMatrixRotationRollPitchYaw(rot.x, rot.y, rot.z) * XMMatrixTranslation(pos.x, pos.y, pos.z);
+	XMFLOAT3 scl = this->transform->GetScaleFloat3();
+	this->worldMatrix = XMMatrixScaling(scl.x, scl.y, scl.z) * XMMatrixRotationRollPitchYaw(rot.x, rot.y, rot.z) * XMMatrixTranslation(pos.x, pos.y, pos.z);
 	this->transform->UpdateDirectionVectors();
+}
+
+void Renderer::Render(const XMMATRIX & viewProjectionMatrix)
+{
+	model.Draw(this->worldMatrix, viewProjectionMatrix);
 }

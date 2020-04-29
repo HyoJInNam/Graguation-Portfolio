@@ -4,6 +4,8 @@
 
 Camera::Camera(GameObject* go): Component(go)
 {
+	cameraMoveSpeed = 0.006f;
+	cameraWheelpeed = 0.6f;
 	this->UpdateMatrix();
 }
 
@@ -17,7 +19,8 @@ void Camera::Container()
 {
 	if (ImGui::TreeNode("Camera"))
 	{
-		ImGui::Text("There is no content yet.");
+		ImGui::InputFloat("move speed", &cameraMoveSpeed);
+		ImGui::InputFloat("wheel speed", &cameraWheelpeed);
 		ImGui::TreePop();
 	}
 }

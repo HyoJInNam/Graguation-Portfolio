@@ -23,4 +23,5 @@ protected:
 	friend class GameObject;
 	virtual void Container();
 	virtual void UpdateMatrix();
+	virtual void Render(const XMMATRIX & viewProjectionMatrix);
 };

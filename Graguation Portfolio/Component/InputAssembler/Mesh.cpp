@@ -16,10 +16,10 @@ Mesh::Mesh(ID3D11Device * device, ID3D11DeviceContext * deviceContext, std::vect
 Mesh::Mesh(const Mesh & mesh)
 {
 	this->deviceContext = mesh.deviceContext;
+	this->transformMatrix = mesh.transformMatrix;
+	this->textures = mesh.textures;
 	this->indexbuffer = mesh.indexbuffer;
 	this->vertexbuffer = mesh.vertexbuffer;
-	this->textures = mesh.textures;
-	this->transformMatrix = mesh.transformMatrix;
 }
 
 void Mesh::Draw()

@@ -106,16 +106,48 @@ bool ShaderClass::InitializeShaders(Microsoft::WRL::ComPtr<ID3D11Device>&  devic
 #endif
 	}
 
-	D3D11_INPUT_ELEMENT_DESC layout[] =
+	//2d shaders
+	D3D11_INPUT_ELEMENT_DESC layoutTerrain[] =
+	{
+		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+		{"COLOR", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+	};
+
+
+	UINT numElementsTerrain = ARRAYSIZE(layoutTerrain);
+
+	if (!vertexshader_Terrain.Initialize(device, shaderfolder + L"vertexshader_Terrain.cso", layoutTerrain, numElementsTerrain))
+		return false;
+
+	if (!pixelshader_Terrain.Initialize(device, shaderfolder + L"pixelshader_Terrain.cso"))
+		return false;
+
+	//2d shaders
+	D3D11_INPUT_ELEMENT_DESC layout2D[] =
+	{
+		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
+	};
+
+	UINT numElements2D = ARRAYSIZE(layout2D);
+
+	if (!vertexshader_2d.Initialize(device, shaderfolder + L"vertexshader_2d.cso", layout2D, numElements2D))
+		return false;
+
+	if (!pixelshader_2d.Initialize(device, shaderfolder + L"pixelshader_2d.cso"))
+		return false;
+
+	//3d shaders
+	D3D11_INPUT_ELEMENT_DESC layout3D[] =
 	{
 		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
 		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
 		{"NORMAL", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
 	};
 
-	UINT numElements = ARRAYSIZE(layout);
+	UINT numElements3D = ARRAYSIZE(layout3D);
 
-	if (!vertexshader.Initialize(device, shaderfolder + L"vertexshader.cso", layout, numElements))
+	if (!vertexshader.Initialize(device, shaderfolder + L"vertexshader.cso", layout3D, numElements3D))
 		return false;
 
 	if (!pixelshader.Initialize(device, shaderfolder + L"pixelshader.cso"))
@@ -139,4 +171,17 @@ void ShaderClass::RenderShader_Light(Microsoft::WRL::ComPtr<ID3D11DeviceContext>
 void ShaderClass::RenderShader_noLight(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext)
 {
 	deviceContext->PSSetShader(pixelshader_nolight.GetShader(), NULL, 0);
+}
+
+void ShaderClass::RenderShader2D(Microsoft::WRL::ComPtr<ID3D11DeviceContext>& deviceContext)
+{
+	deviceContext->IASetInputLayout(vertexshader_2d.GetInputLayout());
+	deviceContext->PSSetShader(pixelshader_2d.GetShader(), NULL, 0);
+	deviceContext->VSSetShader(vertexshader_2d.GetShader(), NULL, 0);
+}
+
+void ShaderClass::RenderTerrain(Microsoft::WRL::ComPtr<ID3D11DeviceContext>& deviceContext)
+{
+	deviceContext->PSSetShader(pixelshader_Terrain.GetShader(), NULL, 0);
+	deviceContext->VSSetShader(vertexshader_Terrain.GetShader(), NULL, 0);
 }

@@ -4,22 +4,27 @@
 class Light : public Component
 {
 public:
+	ConstantBuffer<CB_VS>* GetVertexShader();
+	ConstantBuffer<CB_PS_light>* GetPixelShader();
 	Light(GameObject* go);
-	ConstantBuffer<CB_VS_vertexshader>* GetVertexShader();
-
-public:
-	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext);
-	void Render(ID3D11DeviceContext * deviceContext);
 	virtual void Container() override;
 	virtual void UpdateMatrix() override;
 
-private:
-	BOOL InitializeBuffer(ID3D11Device * device, ID3D11DeviceContext * deviceContext);
-	void RenderBuffer(ID3D11DeviceContext * deviceContext);
+public:
+	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext);
+	void Draw(const XMMATRIX & viewProjectionMatrix);
+	void Render();
 
 private:
-	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
+	BOOL InitializeBuffer(ID3D11Device * device);
+	void RenderBuffer();
+
+private:
+	ID3D11DeviceContext * deviceContext;
+	ConstantBuffer<CB_VS> cb_vs_vertexshader;
 	ConstantBuffer<CB_PS_light> cb_ps_light;
+	XMMATRIX worldMatrix;
+	Model model;
 
 private:
 	DirectX::XMFLOAT3 lightColor;

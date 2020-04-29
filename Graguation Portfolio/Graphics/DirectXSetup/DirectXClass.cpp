@@ -132,6 +132,14 @@ BOOL DirectXClass::Rasterizer()
 		CD3D11_RASTERIZER_DESC rasterizerDesc(D3D11_DEFAULT);
 		HRESULT hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState.GetAddressOf());
 		COM_ERROR_IF_FAILED(hr, "Failed to create rasterizer state.");
+
+		rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+		hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState_CULLBACK.GetAddressOf());
+		COM_ERROR_IF_FAILED(hr, "Failed to create rasterizerState_CULLBACK state.");
+
+		rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_WIREFRAME;
+		hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState_FILLWIRE.GetAddressOf());
+		COM_ERROR_IF_FAILED(hr, "Failed to create rasterizerState_FILLWIRE state.");
 	}
 	catch (COMException & exception)
 	{
@@ -196,4 +204,25 @@ BOOL DirectXClass::Blend()
 		return false;
 	}
 	return true;
+}
+
+
+void DirectXClass::TurnOnCulling()
+{
+	this->deviceContext->RSSetState(rasterizerState_CULLBACK.Get());
+}
+
+void DirectXClass::TurnOffCulling()
+{
+	this->deviceContext->RSSetState(rasterizerState.Get());
+}
+
+void DirectXClass::TurnOnFilling()
+{
+	this->deviceContext->RSSetState(rasterizerState_FILLWIRE.Get());
+}
+
+void DirectXClass::TurnOffFilling()
+{
+	this->deviceContext->RSSetState(rasterizerState.Get());
 }

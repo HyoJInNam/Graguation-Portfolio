@@ -19,11 +19,11 @@ public:
 	Mesh(const Mesh & mesh);
 	void Draw();
 	const DirectX::XMMATRIX & GetTransformMatrix();
-
 private:
+	ID3D11DeviceContext * deviceContext;
+	DirectX::XMMATRIX transformMatrix;
+	std::vector<Texture> textures;
+
 	VertexBuffer<Vertex> vertexbuffer;
 	IndexBuffer indexbuffer;
-	ID3D11DeviceContext * deviceContext;
-	std::vector<Texture> textures;
-	DirectX::XMMATRIX transformMatrix;
 };

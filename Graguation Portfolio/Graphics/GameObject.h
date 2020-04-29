@@ -5,7 +5,10 @@
 #include "Renderer.h"
 #include "Camera.h"
 #include "Light.h"
+#include "Terrain.h"
 
+#include "Canvas.h"
+#include "Sprite.h"
 
 class GameObject
 {
@@ -40,6 +43,9 @@ public:
 	const XMVECTOR& getPosition();
 	const XMVECTOR& getRotation();
 	const XMVECTOR& getScale();
+	const XMFLOAT3& getPositionToF();
+	const XMFLOAT3& getRotationToF();
+	const XMFLOAT3& getScaleToF();
 
 
 	template<typename T>
@@ -68,6 +74,7 @@ public:
 				if (dynamic_cast<T*>(comp) != nullptr) {
 					return static_cast<T*>(comp);
 				}
+				
 			}
 		}
 		catch (COMException & exception)
@@ -86,4 +93,5 @@ public:
 
 	void inspector();
 	void traverseUpdate();
+	void traverseRender(const XMMATRIX & viewProjectionMatrix);
 };

@@ -50,6 +50,8 @@ void Engine::Update()
 	//}
 
 	Transform * mainCameraTransform = this->gfx.MainCamera->getTransform();
+	float cameraWheelpeed = this->gfx.MainCamera->getComponent<Camera>()->cameraWheelpeed;
+	float cameraSpeed = this->gfx.MainCamera->getComponent<Camera>()->cameraMoveSpeed;
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
@@ -60,11 +62,18 @@ void Engine::Update()
 				mainCameraTransform->AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
 			}
 		}
+		if (me.GetType() == MouseEvent::EventType::WheelUp)
+		{
+			mainCameraTransform->AdjustPosition(mainCameraTransform->GetForwardVector() * cameraWheelpeed * dt);
+		}
+		if (me.GetType() == MouseEvent::EventType::WheelDown)
+		{
+			mainCameraTransform->AdjustPosition(mainCameraTransform->GetBackwardVector() * cameraWheelpeed * dt);
+		}
 	}
 
 	//this->gfx.gameObject.AdjustRotation(0.0f, 0.001f*dt, 0.0f);
-
-	float cameraSpeed = 0.006f;
+	//float cameraSpeed = 0.006f;
 
 	if (keyboard.KeyIsPressed('W'))
 	{

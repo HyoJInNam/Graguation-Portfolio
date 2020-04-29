@@ -37,9 +37,19 @@ public:
 	bool InitializeShaders(Microsoft::WRL::ComPtr<ID3D11Device>&  device);
 	void RenderShader_Light(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
 	void RenderShader_noLight(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
+	void RenderShader2D(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
+	void RenderTerrain(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
 
 private:
 	VertexShader vertexshader;
 	PixelShader pixelshader;
 	PixelShader pixelshader_nolight;
+
+private:
+	VertexShader vertexshader_2d;
+	PixelShader pixelshader_2d;
+
+
+	VertexShader vertexshader_Terrain;
+	PixelShader pixelshader_Terrain;
 };

@@ -18,3 +18,7 @@ void Component::UpdateMatrix()
 	if(!gameobject) assert("UpdateMatrix must be overridden." && 0);
 	gameobject->traverseUpdate();
 }
+
+void Component::Render(const XMMATRIX & viewProjectionMatrix)
+{
+}

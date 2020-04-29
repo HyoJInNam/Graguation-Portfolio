@@ -8,6 +8,10 @@ public:
 	void RenderDirect();
 	void PresentBuffer();
 
+	void TurnOnCulling();
+	void TurnOffCulling();
+	void TurnOnFilling();
+	void TurnOffFilling();
 
 private:
 	BOOL DeviceAndSwapChain(HWND& hwnd);
@@ -32,10 +36,11 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilState;
 
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState;
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState_CULLBACK;
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState_FILLWIRE;
 
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendState;
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
 };
-

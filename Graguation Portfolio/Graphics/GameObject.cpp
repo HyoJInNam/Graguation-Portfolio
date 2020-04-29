@@ -66,6 +66,21 @@ const XMVECTOR & GameObject::getScale()
 	return this->transform->GetScaleVector();
 }
 
+const XMFLOAT3 & GameObject::getPositionToF()
+{
+	return this->transform->GetPositionFloat3();
+}
+
+const XMFLOAT3 & GameObject::getRotationToF()
+{
+	return this->transform->GetRotationFloat3();
+}
+
+const XMFLOAT3 & GameObject::getScaleToF()
+{
+	return this->transform->GetScaleFloat3();
+}
+
 void GameObject::setParent(GameObject * parent)
 {
 	this->parent = parent;
@@ -124,5 +139,19 @@ void GameObject::traverseUpdate()
 	for (auto child : children)
 	{
 		child->traverseUpdate();
+	}
+}
+
+void GameObject::traverseRender(const XMMATRIX & viewProjectionMatrix)
+{
+	if (enabled == false) return;
+
+	for (auto comp : components)
+	{
+		comp->Render(viewProjectionMatrix);
+	}
+	for (auto child : children)
+	{
+		child->traverseRender(viewProjectionMatrix);
 	}
 }

@@ -9,42 +9,15 @@ Transform::Transform(GameObject* gameObject)
 	SetRotation(0.0f, 0.0f, 0.0f);
 	SetScale(1.0f, 1.0f, 1.0f);
 }
-//
-//Transform::Transform(GameObject * gameObject, const XMVECTOR * position, const XMVECTOR * rotation, const XMVECTOR * scale)
-//	:Component(gameObject)
-//{
-//	SetPosition(*position);
-//	SetRotation(*rotation);
-//	SetScale(*scale);
-//}
-//
-//Transform::Transform(GameObject * gameObject, const XMFLOAT3 * position, const XMFLOAT3 * rotation, const XMFLOAT3 * scale)
-//	:Component(gameObject)
-//{
-//	SetPosition(*position);
-//	SetRotation(*rotation);
-//	SetScale(*scale);
-//}
-//
-//Transform::Transform(GameObject * gameObject, const XMVECTOR & position, const XMVECTOR & rotation, const XMVECTOR & scale)
-//	: posVector(position), rotVector(rotation), sclVector(scale)
-//	, Component(gameObject)
-//{
-//}
-//
-//Transform::Transform(GameObject * gameObject, const XMFLOAT3 & position, const XMFLOAT3 & rotation, const XMFLOAT3 & scale)
-//	: pos(position), rot(rotation), scl(scale)
-//	, Component(gameObject)
-//{
-//}
-
 void Transform::Container()
 {
 	if (ImGui::TreeNode("Transform"))
 	{
-		ImGui::DragFloat3("position", (float*)&pos, 0.1f, -100.0f, 100.0f);
-		ImGui::DragFloat3("rotation", (float*)&rot, 0.1f, -360.0f, 36.0f);
-		ImGui::DragFloat3("scale", (float*)&scl, 0.1f, 0.0f, 1.0f);
+		//ImGui::DragFloat3("position", (float*)&pos, 0.1f, -100.0f, 100.0f);
+		//ImGui::DragFloat3("rotation", (float*)&rot, 0.1f, -360.0f, 36.0f);
+		ImGui::InputFloat3("position", (float*)&pos);
+		ImGui::InputFloat3("rotation", (float*)&rot);
+		ImGui::InputFloat3("scale", (float*)&scl);// , 0.1f, 0.0f, 100.0f);
 		this->UpdateMatrix();
 		ImGui::TreePop();
 	}
