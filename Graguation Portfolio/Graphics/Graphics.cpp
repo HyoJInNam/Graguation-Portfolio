@@ -160,22 +160,21 @@ bool Graphics::InitializeScene()
 		terrain->addComponent<Terrain>();
 		if (!terrain->getComponent<Terrain>()->Initialize(device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
 			return false;
-		terrain->setPosition(XMFLOAT3(0, -23, 77));
 
 
-		GameObject* MartianCityColony = new GameObject("MartianCityColony", nullptr, "gameObject");
-		gameobjectList.push_back(MartianCityColony);
-		MartianCityColony->addComponent<Renderer>();
-		if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\Center city Sci-Fi\\Center City Sci-Fi.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-			return false;
-		MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
+		//GameObject* MartianCityColony = new GameObject("MartianCityColony", nullptr, "gameObject");
+		//gameobjectList.push_back(MartianCityColony);
+		//MartianCityColony->addComponent<Renderer>();
+		//if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\Center city Sci-Fi\\Center City Sci-Fi.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+		//	return false;
+		//MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
 
 
-		GameObject* gameObject = new GameObject("gameObject", nullptr, "gameObject");
-		gameobjectList.push_back(gameObject);
-		gameObject->addComponent<Renderer>();
-		if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-			return false;
+		//GameObject* gameObject = new GameObject("gameObject", nullptr, "gameObject");
+		//gameobjectList.push_back(gameObject);
+		//gameObject->addComponent<Renderer>();
+		//if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+		//	return false;
 	}
 	catch (COMException & exception)
 	{

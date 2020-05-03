@@ -12,12 +12,12 @@ bool Sprite::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceConte
 
 	texture = std::make_unique<Texture>(device, spritePath, aiTextureType::aiTextureType_DIFFUSE);
 
-	std::vector<Vertex2D> vertexData =
+	std::vector<VertexTexture> vertexData =
 	{
-		Vertex2D(-0.5f, -0.5f, 0.0f, 0.0f, 0.0f), //TopLeft
-		Vertex2D(0.5f, -0.5f, 0.0f, 1.0f, 0.0f), //TopRight
-		Vertex2D(-0.5, 0.5, 0.0f, 0.0f, 1.0f), //Bottom Left
-		Vertex2D(0.5, 0.5, 0.0f, 1.0f, 1.0f), //Bottom Right
+		VertexTexture(-0.5f, -0.5f, 0.0f, 0.0f, 0.0f), //TopLeft
+		VertexTexture(0.5f, -0.5f, 0.0f, 1.0f, 0.0f), //TopRight
+		VertexTexture(-0.5, 0.5, 0.0f, 0.0f, 1.0f), //Bottom Left
+		VertexTexture(0.5, 0.5, 0.0f, 1.0f, 1.0f), //Bottom Right
 	};
 
 	HRESULT hr = vertices.Initialize(device, vertexData.data(), vertexData.size());

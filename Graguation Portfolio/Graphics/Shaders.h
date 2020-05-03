@@ -46,10 +46,10 @@ private:
 	PixelShader pixelshader_nolight;
 
 private:
-	VertexShader vertexshader_2d;
-	PixelShader pixelshader_2d;
+	VertexShader vsTexture;
+	PixelShader psTexture;
 
 
-	VertexShader vertexshader_Terrain;
-	PixelShader pixelshader_Terrain;
+	VertexShader vsColor;
+	PixelShader psColor;
 };

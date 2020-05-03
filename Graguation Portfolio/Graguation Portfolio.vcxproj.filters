@@ -250,14 +250,14 @@
     <FxCompile Include="Shader\pixelshader_nolight.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\pixelshader_2d.hlsl">
+    <FxCompile Include="Shader\vsTexture.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\vertexshader_2d.hlsl">
+    <FxCompile Include="Shader\psTexture.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Shader\pixelshader_Terrain.hlsl" />
-    <FxCompile Include="Shader\vertexshader_Terrain.hlsl" />
+    <FxCompile Include="Shader\vsColor.hlsl" />
+    <FxCompile Include="Shader\psColor.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

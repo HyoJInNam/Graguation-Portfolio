@@ -27,6 +27,6 @@ private:
 	ID3D11DeviceContext * deviceContext = nullptr;
 
 	IndexBuffer indices;
-	VertexBuffer<Vertex2D> vertices;
+	VertexBuffer<VertexTexture> vertices;
 };
 
