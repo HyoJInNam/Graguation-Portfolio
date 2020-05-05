@@ -30,17 +30,16 @@ void Graphics::RenderFrame()
 	XMMATRIX ViewProjectionMatrix = camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
 	{
+		bool isWireFrame = terrain->getComponent<Terrain>()->wireFrame;
 		RenderShader_Light(deviceContext);
 		for (GameObject* go : gameobjectList)
 		{
+			if (go->getComponent<Terrain>()) {
+				if(isWireFrame) TurnOnFilling();
+			}
 			go->traverseRender(ViewProjectionMatrix);
+			if (isWireFrame) TurnOffFilling();
 		}
-
-
-		RenderTerrain(deviceContext);
-		TurnOnFilling();
-		terrain->traverseRender(ViewProjectionMatrix);
-		TurnOffFilling();
 
 		TurnOnCulling();
 		sphere1->getComponent<Renderer>()->Render(ViewProjectionMatrix);
@@ -49,7 +48,7 @@ void Graphics::RenderFrame()
 		sphere1->setPosition(pos);
 		TurnOffCulling();
 
-		sphere2->getComponent<Renderer>()->Render(ViewProjectionMatrix);
+		//sphere2->getComponent<Renderer>()->Render(ViewProjectionMatrix);
 	}
 	{
 		RenderShader_noLight(deviceContext);
@@ -89,6 +88,16 @@ void Graphics::RenderFrame()
 		RenderImGUI();
 		PresentBuffer();
 	}
+}
+
+void Graphics::Release()
+{
+	for (GameObject* go : gameobjectList)
+	{
+		go->traverseDestroy();
+	}
+
+	DELETE_VECTOR(gameobjectList);
 }
 
 bool Graphics::InitializeScene()
@@ -149,7 +158,7 @@ bool Graphics::InitializeScene()
 			return false;
 		sphere1->setScale(XMFLOAT3(2000.0f, 2000.0f, 2000.0f));
 
-		sphere2 = new GameObject("sphere2", nullptr, "gameObject");
+		GameObject* sphere2 = new GameObject("sphere2", nullptr, "gameObject");
 		gameobjectList.push_back(sphere2);
 		sphere2->addComponent<Renderer>();
 		if (!sphere2->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.fbx", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))

@@ -155,3 +155,15 @@ void GameObject::traverseRender(const XMMATRIX & viewProjectionMatrix)
 		child->traverseRender(viewProjectionMatrix);
 	}
 }
+
+void GameObject::traverseDestroy()
+{
+	for (auto comp : components)
+	{
+		comp->Destroy();
+	}
+	for (auto child : children)
+	{
+		child->traverseDestroy();
+	}
+}

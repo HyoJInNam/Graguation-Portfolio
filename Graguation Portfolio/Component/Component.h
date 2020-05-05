@@ -4,7 +4,6 @@
 #include <string>
 using namespace std;
 
-
 #include "InputAssembler/Model.h"
 
 class GameObject;
@@ -24,4 +23,5 @@ protected:
 	virtual void Container();
 	virtual void UpdateMatrix();
 	virtual void Render(const XMMATRIX & viewProjectionMatrix);
+	virtual void Destroy();
 };

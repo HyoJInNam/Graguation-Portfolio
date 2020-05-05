@@ -46,6 +46,11 @@ void Renderer::UpdateMatrix()
 	this->transform->UpdateDirectionVectors();
 }
 
+void Renderer::Destroy()
+{
+	DELETE_VECTOR(GOR_file_toChar);
+}
+
 void Renderer::Render(const XMMATRIX & viewProjectionMatrix)
 {
 	model.Draw(this->worldMatrix, viewProjectionMatrix);

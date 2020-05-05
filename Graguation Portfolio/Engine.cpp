@@ -113,3 +113,8 @@ void Engine::RenderFrame()
 {
 	this->gfx.RenderFrame();
 }
+
+void Engine::Release()
+{
+	gfx.Release();
+}

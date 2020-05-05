@@ -94,4 +94,5 @@ public:
 	void inspector();
 	void traverseUpdate();
 	void traverseRender(const XMMATRIX & viewProjectionMatrix);
+	void traverseDestroy();
 };

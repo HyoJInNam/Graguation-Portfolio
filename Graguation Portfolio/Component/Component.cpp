@@ -22,3 +22,8 @@ void Component::UpdateMatrix()
 void Component::Render(const XMMATRIX & viewProjectionMatrix)
 {
 }
+
+void Component::Destroy()
+{
+	//if (!gameobject) assert("Destroy must be overridden." && 0);
+}

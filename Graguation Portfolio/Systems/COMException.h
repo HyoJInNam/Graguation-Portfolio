@@ -24,3 +24,31 @@ public:
 private:
 	std::wstring whatmsg;
 };
+
+
+#include <ctime>
+
+#define COM_ELAPSED_TIME_START(st) { st = COMElapse::START();}
+#define COM_ELAPSED_TIME_END(st) { COMElapse::END(st); }
+
+class COMElapse
+{
+public:
+	static clock_t START() {  return clock(); }
+	static void END(clock_t startTime) {
+		clock_t endTime = clock();
+		clock_t elapsed = endTime - startTime;// Millisecond
+		double timeInSecond = (double)(elapsed / CLOCKS_PER_SEC);// Second
+
+		//Debug output
+		{
+			std::string outmsg = "Char: ";
+			outmsg += "Elapsed: ";
+			outmsg += std::to_string(timeInSecond);
+			outmsg += "s(";
+			outmsg += std::to_string(elapsed);
+			outmsg += "ms)\n";
+			OutputDebugStringA(outmsg.c_str());
+		}
+	}
+};

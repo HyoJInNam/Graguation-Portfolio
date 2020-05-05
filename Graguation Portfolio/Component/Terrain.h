@@ -1,14 +1,17 @@
 #pragma once
 #include "Component.h"
-
 class Light;
 
 class Terrain : public Component
 {
 public:
+	bool wireFrame = false;
+
+public:
 	Terrain(GameObject* go);
 	virtual void Container() override;
 	virtual void UpdateMatrix() override;
+	virtual void Destroy() override;
 
 public:
 	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, Light* light);
@@ -20,12 +23,12 @@ private:
 
 private:
 	BOOL LoadHeightMap(std::string filename);
-	void NormalizeHeightMap();
+	BOOL CalculateNormals();
+	BOOL CalculateTextureCoordinates();
 	BOOL RefreshTerrainBuffer();
 
 private:
 	ConstantBuffer<CB_VS>* cb_vs_vertexshader;
-	ConstantBuffer<CB_PS_light> cb_ps_pixelshader;
 	
 private:
 	ID3D11Device * device;
@@ -33,13 +36,16 @@ private:
 
 	XMMATRIX transformMatrix;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> texture;
-	VertexBuffer<VertexColor> vertices;
+	VertexBuffer<Vertex> vertices;
 	IndexBuffer indices;
 
 private:
 	int terrainWidth;
 	int terrainHeight;
+
 	vector<XMFLOAT3> heightMap;
+	vector<XMFLOAT2> heightMapTexCoord;
+	vector<XMFLOAT3> heightMapNormals;
 
 	XMFLOAT2 gridGap;
 	XMFLOAT2 oldGridGap;

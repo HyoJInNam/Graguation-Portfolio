@@ -15,12 +15,12 @@ class Graphics: public DirectXClass, ImGuiClass, ShaderClass
 public:
 	bool Initialize(HWND hwnd, int width, int height);
 	void RenderFrame();
+	void Release();
 
 	vector<GameObject*> gameobjectList;
 	GameObject* MainCamera;
 	GameObject* DirectionLight;
 	GameObject* sphere1;
-	GameObject* sphere2;
 	GameObject* terrain;
 	//GameObject* canvas;
 	//GameObject* sprite;

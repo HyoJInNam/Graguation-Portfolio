@@ -9,20 +9,23 @@ cbuffer perObjectBuffer : register(b0)
 
 struct VS_INPUT
 {
-	float3 inPos : POSITION;
-	float4 inColor : COLOR;
+	float3 position : POSITION;
+	float3 normal : NORMAL;
+	float3 color : COLOR;
 };
 
 struct VS_OUTPUT
 {
-	float4 outPosition : SV_POSITION;
-	float4 outColor : COLOR;
+	float4 position : SV_POSITION;
+	float3 normal : NORMAL;
+	float3 color : COLOR;
 };
 
 VS_OUTPUT main(VS_INPUT input)
 {
 	VS_OUTPUT output;
-	output.outPosition = mul(float4(input.inPos, 1.0f), wvpMatrix);
-	output.outColor = input.inColor;
+	output.position = mul(float4(input.position, 1.0f), wvpMatrix);
+	output.normal = normalize(mul(float4(input.normal, 0.0f), worldMatrix));
+	output.color = input.color;
 	return output;
 }

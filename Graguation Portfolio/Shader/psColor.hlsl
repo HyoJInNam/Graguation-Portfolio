@@ -1,6 +1,7 @@
 struct PS_INPUT
 {
 	float4 inPosition : SV_POSITION;
+	float3 inNormal : NORMAL;
 	float3 inColor : COLOR;
 };
 

@@ -11,7 +11,7 @@ public:
 	bool ProcessMessages();
 	void Update();
 	void RenderFrame();
-
+	void Release();
 private:
 	Timer timer;
 };
