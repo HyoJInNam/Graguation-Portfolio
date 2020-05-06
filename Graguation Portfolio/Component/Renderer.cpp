@@ -2,6 +2,9 @@
 #include "DirectXSetup/ImGuiClass.h"
 #include "GameObject.h"
 
+#include "InputAssembler/Texture.h"
+#include <WICTextureLoader.h>
+
 
 Renderer::Renderer(GameObject* go)
 	:Component(go)
@@ -10,6 +13,8 @@ Renderer::Renderer(GameObject* go)
 
 bool Renderer::Initialize(const std::string & filePath, ID3D11Device * device, ID3D11DeviceContext * deviceContext, Light* light)
 {
+	this->device = device;
+	this->deviceContext = deviceContext;
 	if (!model.Initialize(filePath, device, deviceContext, light->GetVertexShader()))
 		return false;
 
@@ -49,6 +54,11 @@ void Renderer::UpdateMatrix()
 void Renderer::Destroy()
 {
 	DELETE_VECTOR(GOR_file_toChar);
+}
+
+void Renderer::SetTexture(const std::string & filePath)
+{
+	model.SetTexture(Texture(device, filePath, aiTextureType::aiTextureType_DIFFUSE));
 }
 
 void Renderer::Render(const XMMATRIX & viewProjectionMatrix)

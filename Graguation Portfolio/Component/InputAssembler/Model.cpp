@@ -102,11 +102,9 @@ Mesh Model::ProcessMesh(aiMesh * mesh, const aiScene * scene, const XMMATRIX & t
 			indices.push_back(face.mIndices[j]);
 	}
 
-	std::vector<Texture> textures;
 	aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 	std::vector<Texture> diffuseTextures = LoadMaterialTextures(material, aiTextureType::aiTextureType_DIFFUSE, scene);
 	textures.insert(textures.end(), diffuseTextures.begin(), diffuseTextures.end());
-
 	return Mesh(this->device, this->deviceContext, vertices, indices, textures, transformMatrix);
 }
 
@@ -228,4 +226,14 @@ int Model::GetTextureIndex(aiString * pStr)
 {
 	assert(pStr->length >= 2);
 	return atoi(&pStr->C_Str()[1]);
+}
+
+void Model::SetTexture(Texture texture)
+{
+	textures.push_back(texture);
+
+	for (int i = 0; i < meshes.size(); i++)
+	{
+		meshes[i].SetTextures(textures);
+	}
 }

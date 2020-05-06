@@ -10,20 +10,19 @@ Terrain::Terrain(GameObject * go)
 	terrainWidth = 10;
 	terrainHeight = 10;
 	gridGap = { 1, 1 };
+	oldGridGap = gridGap;
+	textureCnt = 8;
+	oldTextureCnt = textureCnt;
 }
 
 void Terrain::Container()
 {
 	if (ImGui::TreeNode("Terrain"))
 	{
-		ImGui::Checkbox("Wire Frame", &wireFrame);
 		ImGui::DragFloat2("Grid Gap", (float*)&gridGap, 0.1f, 1.0f, 100.0f);
-		
-		//ImGui::Text("Count");
-		//int vcnt = vertices.VertexCount();
-		//ImGui::InputInt("vertices", &vcnt);
-		//int icnt = indices.IndexCount();
-		//ImGui::InputInt("indices", &icnt);
+		//소인수분해 값에 따라서 꺠지지 않고 그려짐.
+		ImGui::DragInt("Texture Count", &textureCnt, 0.1f, 1.0f, 128.0f);
+		ImGui::Text("Texture count can only be broken down by factorization");
 		ImGui::TreePop();
 	}
 }
@@ -39,6 +38,7 @@ void Terrain::UpdateMatrix()
 
 void Terrain::Destroy()
 {
+	//ZeroMemory(&heightMapTexCoord, size(heightMapTexCoord));
 	heightMapTexCoord.clear();
 	heightMapNormals.clear();
 	heightMap.clear();
@@ -52,7 +52,7 @@ bool Terrain::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceCont
 
 	if (!LoadHeightMap("Data/Textures/heightmap01.bmp")) return false;
 	if (!CalculateNormals()) return false;
-	CalculateTextureCoordinates();
+	if (!CalculateTextureCoordinates()) return false;
 	if (!InitializeBuffer()) return false;
 
 	this->transform->SetPosition(-124.0f, 0.0f, 0.0f);
@@ -63,12 +63,8 @@ bool Terrain::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceCont
 
 void Terrain::Render(const XMMATRIX & viewProjectionMatrix)
 {
-	//RefreshTerrainBuffer();
-
-	//Calculate World-View-Projection Matrix
 	this->cb_vs_vertexshader->data.wvpMatrix = this->transformMatrix * viewProjectionMatrix;
 	this->cb_vs_vertexshader->data.worldMatrix = this->transformMatrix;
-	//Calculate World
 	this->cb_vs_vertexshader->ApplyChanges();
 
 	RenderBuffer();
@@ -104,6 +100,7 @@ BOOL Terrain::LoadHeightMap(std::string filename)
 		hr = (fclose(filePtr) != 0);
 		COM_ERROR_IF_FAILED(hr, "Failed to close the file.");
 
+		ZeroMemory(&heightMap, sizeof(heightMap));
 		int k = 0;
 		for (int j = 0; j < terrainHeight; j++)
 		{
@@ -128,7 +125,6 @@ BOOL Terrain::LoadHeightMap(std::string filename)
 BOOL Terrain::CalculateNormals()
 {
 	XMFLOAT3* normals = new XMFLOAT3[(terrainHeight - 1) * (terrainWidth - 1)];
-	if (!normals) return false;
 	
 	auto minus = [&](XMFLOAT3 vt1, XMFLOAT3 vt2)->XMFLOAT3 { return XMFLOAT3(vt1.x - vt2.x, vt1.y - vt2.y, vt1.z - vt2.z);  };
 	XMFLOAT3 vector1, vector2;
@@ -153,6 +149,7 @@ BOOL Terrain::CalculateNormals()
 	int count = 0;
 	float length = 0.0f;
 
+	ZeroMemory(&heightMapNormals, sizeof(heightMapNormals));
 	// 이제 모든 정점을 살펴보고 각면의 평균을 취합니다. 	
 	// 정점이 닿아 그 정점에 대한 평균 평균값을 얻는다.
 
@@ -208,8 +205,8 @@ BOOL Terrain::CalculateNormals()
 
 BOOL Terrain::CalculateTextureCoordinates()
 {
-	float incrementValue = (float)8 / (float)terrainWidth;// 텍스처 좌표를 얼마나 많이 증가 시킬지 계산합니다.
-	int incrementCount = terrainWidth / 8; // 텍스처를 반복 할 횟수를 계산합니다.
+	float incrementValue = (float)textureCnt / (float)terrainWidth;
+	int incrementCount = terrainWidth / textureCnt;
 
 	XMFLOAT2 tCoordinate = { 0.0f, 1.0f };
 	XMINT2 tCnt = { 0, 0 };
@@ -246,6 +243,7 @@ BOOL Terrain::CalculateTextureCoordinates()
 		}
 	}
 
+	ZeroMemory(&heightMapTexCoord, sizeof(heightMapTexCoord));
 	XMFLOAT2 tc[4];
 	for (int z = 0; z < terrainHeight - 1; z++)
 	{
@@ -343,25 +341,59 @@ void Terrain::RenderBuffer()
 
 BOOL Terrain::RefreshTerrainBuffer()
 {
-	if ((oldGridGap.x == gridGap.x) && (oldGridGap.y == gridGap.y)) return false;
+	bool isRedraw[3] = { false, false, false };
+	isRedraw[2] = (oldTextureCnt == textureCnt) ? false : true;
+	isRedraw[1] = ((oldGridGap.x == gridGap.x) && (oldGridGap.y == gridGap.y)) ? false : true;
+	isRedraw[0] = ((!isRedraw[2])&&(!isRedraw[1])) ? false : true;
+	if (!isRedraw[0]) return false;
 	try
 	{
-		vertices.Get()->Release();
 		std::vector<Vertex> vertexData;
 		ZeroMemory(&vertexData, sizeof(vertexData));
 
-		int index = 0;
-		for (int z = 0; z < terrainHeight; z++)
-		{
-			for (int x = 0; x < terrainWidth; x++)
+		if (isRedraw[1]) {
+
+			for (int z = 0; z < terrainHeight; z++)
 			{
-				vertexData.push_back(Vertex(heightMap[terrainWidth * z + x], heightMapTexCoord[terrainWidth * z + x], heightMapNormals[terrainWidth * z + x]));
+				for (int x = 0; x < terrainWidth; x++)
+				{
+					heightMap[(terrainHeight * z) + x].x = x * gridGap.x;
+					heightMap[(terrainHeight * z) + x].z = z * gridGap.y;
+				}
+			}
+
+			if (!CalculateNormals()) return false;
+		}
+		if (isRedraw[2]) if (!CalculateTextureCoordinates()) return false;
+
+		XMINT4 index;
+		int cnt = 0;
+		for (int z = 0; z < terrainHeight - 1; z++)
+		{
+			for (int x = 0; x < terrainWidth - 1; x++)
+			{
+				index = { (terrainHeight * z) + x				// 왼쪽 아래.
+						,(terrainHeight * z) + (x + 1)			// 오른쪽 아래.
+						,(terrainHeight * (z + 1)) + x			// 왼쪽 위.
+						,(terrainHeight * (z + 1)) + (x + 1)	// 오른쪽 위.
+				};
+
+				vertexData.push_back(Vertex(heightMap[index.x], heightMapTexCoord[cnt++], heightMapNormals[index.x]));
+				vertexData.push_back(Vertex(heightMap[index.z], heightMapTexCoord[cnt++], heightMapNormals[index.z]));
+				vertexData.push_back(Vertex(heightMap[index.y], heightMapTexCoord[cnt++], heightMapNormals[index.y]));
+
+				vertexData.push_back(Vertex(heightMap[index.z], heightMapTexCoord[cnt++], heightMapNormals[index.z]));
+				vertexData.push_back(Vertex(heightMap[index.w], heightMapTexCoord[cnt++], heightMapNormals[index.w]));
+				vertexData.push_back(Vertex(heightMap[index.y], heightMapTexCoord[cnt++], heightMapNormals[index.y]));
 			}
 		}
 
+		VertexBuffer<Vertex> origin = vertices;
 		HRESULT hr = vertices.Initialize(device, vertexData.data(), vertexData.size());
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize vertex buffer for sprite.");
+		origin.Get()->Release();
 		oldGridGap = gridGap;
+		oldTextureCnt = textureCnt;
 	}
 	catch (COMException & exception)
 	{

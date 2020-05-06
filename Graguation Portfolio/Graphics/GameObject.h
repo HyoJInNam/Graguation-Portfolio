@@ -24,7 +24,9 @@ protected:
 
 public:
 	static vector<GameObject *> gameObjects;
-	
+
+	bool isFill = false;
+	bool isCullMode = true;
 
 public:	
 	GameObject(const string& name = "GameObejct", GameObject* parent = nullptr, const string& tag = "");

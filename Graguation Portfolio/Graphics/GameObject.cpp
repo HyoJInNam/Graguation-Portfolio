@@ -119,7 +119,17 @@ void GameObject::inspector()
 {
 	if (enabled == false) return;
 
-	ImGui::Text(name.c_str());
+	ImGui::Checkbox("", &enabled);
+	ImGui::SameLine();
+	ImGui::InputText("", const_cast<char*>(name.c_str()), name.size());
+	ImGui::Text("tag");
+	ImGui::SameLine();
+	ImGui::InputText("", const_cast<char*>(tag.c_str()), tag.size());
+
+	ImGui::Checkbox("Wire Frame", &isFill);
+	ImGui::SameLine();
+	ImGui::Checkbox("Cull Mode", &isCullMode);
+
 	for (auto comp : components)
 	{
 		comp->Container();

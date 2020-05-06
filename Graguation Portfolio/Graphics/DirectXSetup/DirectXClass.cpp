@@ -207,22 +207,26 @@ BOOL DirectXClass::Blend()
 }
 
 
-void DirectXClass::TurnOnCulling()
+BOOL DirectXClass::TurnOnCulling()
 {
 	this->deviceContext->RSSetState(rasterizerState_CULLBACK.Get());
+	return false;
 }
 
-void DirectXClass::TurnOffCulling()
+BOOL DirectXClass::TurnOffCulling()
 {
 	this->deviceContext->RSSetState(rasterizerState.Get());
+	return true;
 }
 
-void DirectXClass::TurnOnFilling()
+BOOL DirectXClass::TurnOnFilling()
 {
 	this->deviceContext->RSSetState(rasterizerState_FILLWIRE.Get());
+	return true;
 }
 
-void DirectXClass::TurnOffFilling()
+BOOL DirectXClass::TurnOffFilling()
 {
 	this->deviceContext->RSSetState(rasterizerState.Get());
+	return false;
 }

@@ -55,6 +55,21 @@ void Engine::Update()
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
+
+		if (mouse.IsLeftDown())
+		{
+			if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
+			{
+				LDrag = true;
+			}
+
+		}
+		else if (LDrag)
+		{
+			LDrag = false;
+			this->gfx.terrain->getComponent<Terrain>()->RefreshTerrainBuffer();
+		}
+
 		if (mouse.IsRightDown())
 		{
 			if (me.GetType() == MouseEvent::EventType::RAW_MOVE)

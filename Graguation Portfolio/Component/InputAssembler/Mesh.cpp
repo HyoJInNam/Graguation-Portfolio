@@ -1,5 +1,6 @@
 #include "Mesh.h"
 
+
 Mesh::Mesh(ID3D11Device * device, ID3D11DeviceContext * deviceContext, std::vector<Vertex>& vertices, std::vector<DWORD>& indices, std::vector<Texture> & textures, const DirectX::XMMATRIX & transformMatrix)
 {
 	this->deviceContext = deviceContext;
@@ -31,7 +32,6 @@ void Mesh::Draw()
 		if (textures[i].GetType() == aiTextureType::aiTextureType_DIFFUSE)
 		{
 			this->deviceContext->PSSetShaderResources(0, 1, textures[i].GetTextureResourceViewAddress());
-			break;
 		}
 	}
 
@@ -43,4 +43,9 @@ void Mesh::Draw()
 const DirectX::XMMATRIX & Mesh::GetTransformMatrix()
 {
 	return this->transformMatrix;
+}
+
+void Mesh::SetTextures(std::vector<Texture> & textures)
+{
+	this->textures = textures;
 }

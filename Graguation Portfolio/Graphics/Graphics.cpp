@@ -30,25 +30,21 @@ void Graphics::RenderFrame()
 	XMMATRIX ViewProjectionMatrix = camera->GetViewMatrix() * camera->GetProjectionMatrix();
 
 	{
-		bool isWireFrame = terrain->getComponent<Terrain>()->wireFrame;
+		bool isWireFrame = false;
+		bool isCullMode = true;
 		RenderShader_Light(deviceContext);
 		for (GameObject* go : gameobjectList)
 		{
-			if (go->getComponent<Terrain>()) {
-				if(isWireFrame) TurnOnFilling();
-			}
+			if (!go->isCullMode) isCullMode = TurnOnCulling();
+			if (go->isFill) isWireFrame = TurnOnFilling();
 			go->traverseRender(ViewProjectionMatrix);
-			if (isWireFrame) TurnOffFilling();
+			if (isWireFrame) isWireFrame = TurnOffFilling();
+			if (!isCullMode) isCullMode = TurnOffCulling();
 		}
 
-		TurnOnCulling();
-		sphere1->getComponent<Renderer>()->Render(ViewProjectionMatrix);
 		XMFLOAT3 pos = sphere1->getPositionToF();
 		pos.z = sphere1->getScaleToF().z / 4;
 		sphere1->setPosition(pos);
-		TurnOffCulling();
-
-		//sphere2->getComponent<Renderer>()->Render(ViewProjectionMatrix);
 	}
 	{
 		RenderShader_noLight(deviceContext);
@@ -104,6 +100,9 @@ bool Graphics::InitializeScene()
 {
 	try
 	{
+		HRESULT hr = this->cb_vs_vertexshader_2d.Initialize(this->device.Get(), this->deviceContext.Get());
+		COM_ERROR_IF_FAILED(hr, "Failed to initialize 2d constant buffer.");
+
 		DirectionLight = new GameObject("DirectionLight", nullptr, "DirectionLight");
 		gameobjectList.push_back(DirectionLight);
 		DirectionLight->addComponent<Light>();
@@ -126,19 +125,17 @@ bool Graphics::InitializeScene()
 
 
 		//Load Texture
-		HRESULT hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\seamless_grass.jpg", nullptr, grassTexture.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
+		//HRESULT hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\seamless_grass.jpg", nullptr, grassTexture.GetAddressOf());
+		//COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
-		hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\pinksquare.jpg", nullptr, pinkTexture.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
+		//hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\pinksquare.jpg", nullptr, pinkTexture.GetAddressOf());
+		//COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
-		hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\seamless_pavement.jpg", nullptr, pavementTexture.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
+		//hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\seamless_pavement.jpg", nullptr, pavementTexture.GetAddressOf());
+		//COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
 
 
-		hr = this->cb_vs_vertexshader_2d.Initialize(this->device.Get(), this->deviceContext.Get());
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize 2d constant buffer.");
 
 		//sprite = new GameObject("Sprite", nullptr, "Sprite");
 		//sprite->addComponent<Sprite>();
@@ -152,26 +149,37 @@ bool Graphics::InitializeScene()
 		//	return false;
 
 		sphere1 = new GameObject("sphere", nullptr, "gameObject");
+		sphere1->isCullMode = false;
 		gameobjectList.push_back(sphere1);
 		sphere1->addComponent<Renderer>();
-		if (!sphere1->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.fbx", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+		if (!sphere1->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
 			return false;
+		sphere1->getComponent<Renderer>()->SetTexture("Data/Textures/sky.jpg");
 		sphere1->setScale(XMFLOAT3(2000.0f, 2000.0f, 2000.0f));
 
 		GameObject* sphere2 = new GameObject("sphere2", nullptr, "gameObject");
 		gameobjectList.push_back(sphere2);
 		sphere2->addComponent<Renderer>();
-		if (!sphere2->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.fbx", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+		if (!sphere2->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
 			return false;
+		sphere2->getComponent<Renderer>()->SetTexture("Data/Textures/pinksquare.jpg");
+		sphere2->setScale(XMFLOAT3(3.0f, 3.0f, 3.0f));
 
 		terrain = new GameObject("Terrain", nullptr, "Terrain");
 		gameobjectList.push_back(terrain);
 		terrain->addComponent<Terrain>();
 		if (!terrain->getComponent<Terrain>()->Initialize(device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
 			return false;
-
+		//terrain->setScale(XMFLOAT3(10.0f, 10.0f, 10.0f));
 
 		//GameObject* MartianCityColony = new GameObject("MartianCityColony", nullptr, "gameObject");
+		//gameobjectList.push_back(MartianCityColony);
+		//MartianCityColony->addComponent<Renderer>();
+		//if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\\MartianCityColony\\city colony.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+		//	return false;
+		//MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
+
+		//GameObject* MartianCityColony = new GameObject("Center city Sci-Fi", nullptr, "gameObject");
 		//gameobjectList.push_back(MartianCityColony);
 		//MartianCityColony->addComponent<Renderer>();
 		//if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\Center city Sci-Fi\\Center City Sci-Fi.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))

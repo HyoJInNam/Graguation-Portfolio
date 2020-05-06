@@ -1,4 +1,5 @@
 #include "Component.h"
+#include "DirectXSetup/ImGuiClass.h"
 #include "GameObject.h"
 
 

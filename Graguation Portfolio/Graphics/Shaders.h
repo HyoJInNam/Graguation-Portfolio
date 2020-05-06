@@ -48,8 +48,4 @@ private:
 private:
 	VertexShader vsTexture;
 	PixelShader psTexture;
-
-
-	VertexShader vsColor;
-	PixelShader psColor;
 };

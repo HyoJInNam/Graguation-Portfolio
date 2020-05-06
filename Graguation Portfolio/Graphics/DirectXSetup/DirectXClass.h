@@ -8,10 +8,10 @@ public:
 	void RenderDirect();
 	void PresentBuffer();
 
-	void TurnOnCulling();
-	void TurnOffCulling();
-	void TurnOnFilling();
-	void TurnOffFilling();
+	BOOL TurnOnCulling();
+	BOOL TurnOffCulling();
+	BOOL TurnOnFilling();
+	BOOL TurnOffFilling();
 
 private:
 	BOOL DeviceAndSwapChain(HWND& hwnd);

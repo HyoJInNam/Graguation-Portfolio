@@ -16,6 +16,5 @@ protected:
 	MouseClass		mouse;
 	Graphics		gfx;
 private:	
-
 };
 
