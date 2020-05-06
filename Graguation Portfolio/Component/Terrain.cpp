@@ -38,7 +38,6 @@ void Terrain::UpdateMatrix()
 
 void Terrain::Destroy()
 {
-	//ZeroMemory(&heightMapTexCoord, size(heightMapTexCoord));
 	heightMapTexCoord.clear();
 	heightMapNormals.clear();
 	heightMap.clear();
@@ -55,7 +54,7 @@ bool Terrain::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceCont
 	if (!CalculateTextureCoordinates()) return false;
 	if (!InitializeBuffer()) return false;
 
-	this->transform->SetPosition(-124.0f, 0.0f, 0.0f);
+	this->transform->SetPosition(0.0f, 0.0f, 0.0f);
 	this->transform->SetRotation(0.0f, 0.0f, 0.0f);
 	this->UpdateMatrix();
 	return true;
@@ -278,7 +277,7 @@ BOOL Terrain::InitializeBuffer()
 {
 	try
 	{
-		HRESULT hr = DirectX::CreateWICTextureFromFile(device, L"Data/Textures/seamless_grass.jpg", nullptr, texture.GetAddressOf());
+		HRESULT hr = DirectX::CreateWICTextureFromFile(device, L"Data/Textures/dirt01.jpg", nullptr, texture.GetAddressOf());
 		COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
 
 		std::vector<Vertex> vertexData;

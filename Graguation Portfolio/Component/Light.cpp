@@ -11,8 +11,8 @@ Light::Light(GameObject * go)
 	lightColor = DirectX::XMFLOAT3(1.0f, 1.0f, 1.0f);
 	lightStrength = 1.0f;
 	attenuation_a = 1.0f;
-	attenuation_b = 0.1f;
-	attenuation_c = 0.1f;
+	attenuation_b = 0.0f;
+	attenuation_c = 0.0f;
 }
 
 ConstantBuffer<CB_VS>* Light::GetVertexShader()
@@ -31,9 +31,9 @@ void Light::Container()
 	{
 		ImGui::DragFloat3("Ambient Light Color", &this->cb_ps_light.data.ambientLightColor.x, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat("Ambient Light Strength", &this->cb_ps_light.data.ambientLightStrength, 0.01f, 0.0f, 1.0f);
-		ImGui::DragFloat("Dynamic Light Attenuation A", &this->attenuation_a, 0.01f, 0.1f, 10.0f);
-		ImGui::DragFloat("Dynamic Light Attenuation B", &this->attenuation_b, 0.01f, 0.0f, 10.0f);
-		ImGui::DragFloat("Dynamic Light Attenuation C", &this->attenuation_c, 0.01f, 0.0f, 10.0f);
+		ImGui::SliderFloat("Dynamic Light Attenuation A", &this->attenuation_a, 0.1f, 10.0f);
+		ImGui::SliderFloat("Dynamic Light Attenuation B", &this->attenuation_b, 0.0f, 10.0f);
+		ImGui::SliderFloat("Dynamic Light Attenuation C", &this->attenuation_c, 0.0f, 10.0f);
 		ImGui::TreePop();
 	}
 }

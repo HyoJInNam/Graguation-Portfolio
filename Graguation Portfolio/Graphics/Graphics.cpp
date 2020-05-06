@@ -25,38 +25,48 @@ void Graphics::RenderFrame()
 {
 	Camera* camera = MainCamera->getComponent<Camera>();
 	DirectionLight->getComponent<Light>()->Render();
+
 	RenderDirect();
 
 	XMMATRIX ViewProjectionMatrix = camera->GetViewMatrix() * camera->GetProjectionMatrix();
+
 
 	{
 		bool isWireFrame = false;
 		bool isCullMode = true;
 		RenderShader_Light(deviceContext);
-		for (GameObject* go : gameobjectList)
+
+		
+		for (GameObject* go : GameObject::gameObjects)
 		{
 			if (!go->isCullMode) isCullMode = TurnOnCulling();
 			if (go->isFill) isWireFrame = TurnOnFilling();
-			go->traverseRender(ViewProjectionMatrix);
+			if (go->isActive()) go->traverseRender(ViewProjectionMatrix);
 			if (isWireFrame) isWireFrame = TurnOffFilling();
 			if (!isCullMode) isCullMode = TurnOffCulling();
 		}
 
-		XMFLOAT3 pos = sphere1->getPositionToF();
-		pos.z = sphere1->getScaleToF().z / 4;
-		sphere1->setPosition(pos);
 	}
 	{
 		RenderShader_noLight(deviceContext);
 		DirectionLight->getComponent<Light>()->Draw(ViewProjectionMatrix);
-	}
-	{
-		RenderShader2D(deviceContext);
-		//sprite->getComponent<Sprite>()->Draw(canvas->getComponent<Canvas>()->GetWorldMatrix() * canvas->getComponent<Canvas>()->GetOrthoMatrix());
-	}
 
-	//Draw Text->
+	}
 	{
+		//RenderColor(deviceContext);
+		XMFLOAT3 pos = SkyDome->getPositionToF();
+		pos.z = SkyDome->getScaleToF().z / 4;
+		SkyDome->setPosition(pos);
+	}
+	{	
+		RenderShader2D(deviceContext);
+		GameObject* go_canvs = MainCamera->Find("Canvas");
+		Canvas* canvas = go_canvs->getComponent<Canvas>();
+		XMMATRIX orthoMatrix = canvas->GetWorldMatrix() * canvas->GetOrthoMatrix();
+
+		GameObject* go_sprite = MainCamera->Find("Sprite");
+		go_sprite->getComponent<Sprite>()->Draw(orthoMatrix);
+
 		static int fpsCounter = 0;
 		static std::string fpsString = "FPS: 0";
 		fpsCounter += 1;
@@ -77,9 +87,9 @@ void Graphics::RenderFrame()
 	//IMGUIC
 	{
 		FrameImGUI();
-		Hierarchy(gameobjectList);
+		Hierarchy(GameObject::gameObjects);
 		Project();
-		Inspector(gameobjectList);
+		Inspector(GameObject::gameObjects);
 		DebugConsol();
 		RenderImGUI();
 		PresentBuffer();
@@ -88,12 +98,12 @@ void Graphics::RenderFrame()
 
 void Graphics::Release()
 {
-	for (GameObject* go : gameobjectList)
+	for (GameObject* go : GameObject::gameObjects)
 	{
 		go->traverseDestroy();
 	}
 
-	DELETE_VECTOR(gameobjectList);
+	DELETE_VECTOR(GameObject::gameObjects);
 }
 
 bool Graphics::InitializeScene()
@@ -104,94 +114,53 @@ bool Graphics::InitializeScene()
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize 2d constant buffer.");
 
 		DirectionLight = new GameObject("DirectionLight", nullptr, "DirectionLight");
-		gameobjectList.push_back(DirectionLight);
 		DirectionLight->addComponent<Light>();
-		if (!DirectionLight->getComponent<Light>()->Initialize(device.Get(), deviceContext.Get()))
-			return false;
-
+		DirectionLight->getComponent<Light>()->Initialize(device.Get(), deviceContext.Get());
+		DirectionLight->setPosition(XMFLOAT3(-20, -1, 0));
 
 		MainCamera = new GameObject("MainCamera", nullptr, "MainCamera");
-		gameobjectList.push_back(MainCamera);
 		MainCamera->addComponent<Camera>();
 		MainCamera->getComponent<Transform>()->SetPosition(0.0f, 0.0f, -2.0f);
 		MainCamera->getComponent<Camera>()->SetProjectionValues(90.0f, static_cast<float>(windowWidth) / static_cast<float>(windowHeight), 0.1f, 3000.0f);
-
 		MainCamera->setPosition(XMFLOAT3(0, 10, -5));
 
-		//canvas = new GameObject("Canvas", nullptr, "Canvas");
-		//gameobjectList.push_back(canvas);
-		//canvas->addComponent<Canvas>();
-		//canvas->getComponent<Canvas>()->SetProjectionValues(windowWidth, windowHeight, 0.0f, 1.0f);
-
-
-		//Load Texture
-		//HRESULT hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\seamless_grass.jpg", nullptr, grassTexture.GetAddressOf());
-		//COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
-
-		//hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\pinksquare.jpg", nullptr, pinkTexture.GetAddressOf());
-		//COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
-
-		//hr = DirectX::CreateWICTextureFromFile(device.Get(), L"Data\\Textures\\seamless_pavement.jpg", nullptr, pavementTexture.GetAddressOf());
-		//COM_ERROR_IF_FAILED(hr, "Failed to create wic texture from file.");
-
-
-
-
-		//sprite = new GameObject("Sprite", nullptr, "Sprite");
-		//sprite->addComponent<Sprite>();
-		//if (!sprite->getComponent<Sprite>()->Initialize(device.Get(), deviceContext.Get(), 256, 256, "Data/Textures/HeightMap256.png", cb_vs_vertexshader_2d))
-		//	return false;
-
-		//GameObject* terrain = new GameObject("Terrain", nullptr, "Terrain");
-		//gameobjectList.push_back(terrain);
-		//terrain->addComponent<Terrain>();
-		//if (!terrain->getComponent<Terrain>()->Initialize(device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-		//	return false;
-
-		sphere1 = new GameObject("sphere", nullptr, "gameObject");
-		sphere1->isCullMode = false;
-		gameobjectList.push_back(sphere1);
-		sphere1->addComponent<Renderer>();
-		if (!sphere1->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+		SkyDome = new GameObject("sphere", nullptr, "gameObject");
+		SkyDome->isCullMode = false;
+		SkyDome->addComponent<Renderer>();
+		if (!SkyDome->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
 			return false;
-		sphere1->getComponent<Renderer>()->SetTexture("Data/Textures/sky.jpg");
-		sphere1->setScale(XMFLOAT3(2000.0f, 2000.0f, 2000.0f));
-
-		GameObject* sphere2 = new GameObject("sphere2", nullptr, "gameObject");
-		gameobjectList.push_back(sphere2);
-		sphere2->addComponent<Renderer>();
-		if (!sphere2->getComponent<Renderer>()->Initialize("Data\\Objects\\sphere.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-			return false;
-		sphere2->getComponent<Renderer>()->SetTexture("Data/Textures/pinksquare.jpg");
-		sphere2->setScale(XMFLOAT3(3.0f, 3.0f, 3.0f));
+		SkyDome->setScale(XMFLOAT3(2000.0f, 2000.0f, 2000.0f));
 
 		terrain = new GameObject("Terrain", nullptr, "Terrain");
-		gameobjectList.push_back(terrain);
 		terrain->addComponent<Terrain>();
-		if (!terrain->getComponent<Terrain>()->Initialize(device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+		terrain->getComponent<Terrain>()->Initialize(device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>());
+		terrain->setScale(XMFLOAT3(5.0f, 5.0f, 5.0f));
+
+		XMFLOAT3 pos = terrain->getPositionToF();
+		pos.x = (terrain->getComponent<Terrain>()->terrainWidth * terrain->getScaleToF().x) / -2.0f;
+		pos.z = (terrain->getComponent<Terrain>()->terrainHeight * terrain->getScaleToF().z) / -2.0f;
+		terrain->setPosition(pos);
+
+		GameObject* gameObject = new GameObject("gameObject", nullptr, "gameObject");
+		gameObject->addComponent<Renderer>();
+		if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
 			return false;
-		//terrain->setScale(XMFLOAT3(10.0f, 10.0f, 10.0f));
 
-		//GameObject* MartianCityColony = new GameObject("MartianCityColony", nullptr, "gameObject");
-		//gameobjectList.push_back(MartianCityColony);
-		//MartianCityColony->addComponent<Renderer>();
-		//if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\\MartianCityColony\\city colony.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-		//	return false;
-		//MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
+		gameObject = new GameObject("MartianCityColony", nullptr, "gameObject");
+		gameObject->addComponent<Renderer>();
+		if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\\MartianCityColony\\city colony.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+			return false;
+		gameObject->setPosition(XMFLOAT3(-145, -1, -264));
+		gameObject->setRotation(XMFLOAT3(0, 3.5f, 0));
 
-		//GameObject* MartianCityColony = new GameObject("Center city Sci-Fi", nullptr, "gameObject");
-		//gameobjectList.push_back(MartianCityColony);
-		//MartianCityColony->addComponent<Renderer>();
-		//if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\Center city Sci-Fi\\Center City Sci-Fi.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-		//	return false;
-		//MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
+		GameObject* canvas = new GameObject("Canvas", nullptr, "Canvas");
+		canvas->addComponent<Canvas>();
+		canvas->getComponent<Canvas>()->SetProjectionValues(windowWidth, windowHeight, 0.0f, 1.0f);
 
-
-		//GameObject* gameObject = new GameObject("gameObject", nullptr, "gameObject");
-		//gameobjectList.push_back(gameObject);
-		//gameObject->addComponent<Renderer>();
-		//if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-		//	return false;
+		GameObject* gameObject2D = new GameObject("Sprite", canvas, "Sprite");
+		gameObject2D->addComponent<Sprite>();
+		if (!gameObject2D->getComponent<Sprite>()->Initialize(device.Get(), deviceContext.Get(), 256, 256, "Data/Textures/HeightMap256.png", cb_vs_vertexshader_2d))
+			return false;
 	}
 	catch (COMException & exception)
 	{

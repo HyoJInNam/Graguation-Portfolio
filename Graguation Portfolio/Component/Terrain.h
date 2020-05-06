@@ -20,10 +20,11 @@ private:
 	void RenderBuffer();
 
 
-private:
+public:
 	int terrainWidth;
 	int terrainHeight;
 
+private:
 	vector<XMFLOAT3> heightMap;
 	vector<XMFLOAT2> heightMapTexCoord;
 	vector<XMFLOAT3> heightMapNormals;
