@@ -9,7 +9,6 @@ GameObject::GameObject(const string & name, GameObject * parent, const string & 
 {
 	components.clear();
 	components.push_back(transform);
-	gameObjects.push_back(this);
 }
 
 string GameObject::getName() const
@@ -118,6 +117,8 @@ vector<GameObject*> GameObject::allFind(const string & path)
 
 void GameObject::inspector()
 {
+	if (enabled == false) return;
+
 	ImGui::Checkbox("", &enabled);
 	ImGui::SameLine();
 	ImGui::InputText("", const_cast<char*>(name.c_str()), name.size());

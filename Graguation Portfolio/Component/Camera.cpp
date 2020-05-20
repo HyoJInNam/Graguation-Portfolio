@@ -4,7 +4,7 @@
 
 Camera::Camera(GameObject* go): Component(go)
 {
-	cameraMoveSpeed = 0.1f;
+	cameraMoveSpeed = 0.006f;
 	cameraWheelpeed = 0.6f;
 	this->UpdateMatrix();
 }

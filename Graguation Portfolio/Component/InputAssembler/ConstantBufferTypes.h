@@ -24,9 +24,3 @@ struct CB_PS_light
 	float dynamicLightAttenuation_b;
 	float dynamicLightAttenuation_c;
 };
-
-struct GradientBufferType
-{
-	DirectX::XMFLOAT4 apexColor;
-	DirectX::XMFLOAT4 centerColor;
-};

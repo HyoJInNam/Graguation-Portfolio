@@ -14,6 +14,7 @@ public:
 	virtual void Container() override;
 	virtual void UpdateMatrix() override;
 	virtual void Destroy() override;
+
 private:
 	Model model;
 

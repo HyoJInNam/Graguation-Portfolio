@@ -105,19 +105,6 @@ bool ShaderClass::InitializeShaders(Microsoft::WRL::ComPtr<ID3D11Device>&  devic
 #endif
 #endif
 	}
-	//dome shader
-	D3D11_INPUT_ELEMENT_DESC layoutColor[] =
-	{
-		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
-	};
-
-	UINT numElements = ARRAYSIZE(layoutColor);
-
-	if (!vsTexture.Initialize(device, shaderfolder + L"vsColor.cso", layoutColor, numElements))
-		return false;
-
-	if (!psTexture.Initialize(device, shaderfolder + L"psColor.cso"))
-		return false;
 
 	//2d shaders
 	D3D11_INPUT_ELEMENT_DESC layout2D[] =
@@ -126,7 +113,7 @@ bool ShaderClass::InitializeShaders(Microsoft::WRL::ComPtr<ID3D11Device>&  devic
 		{"TEXCOORD", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0  },
 	};
 
-	numElements = ARRAYSIZE(layout2D);
+	UINT numElements = ARRAYSIZE(layout2D);
 
 	if (!vsTexture.Initialize(device, shaderfolder + L"vsTexture.cso", layout2D, numElements))
 		return false;
@@ -173,13 +160,6 @@ void ShaderClass::RenderShader_noLight(Microsoft::WRL::ComPtr<ID3D11DeviceContex
 void ShaderClass::RenderShader2D(Microsoft::WRL::ComPtr<ID3D11DeviceContext>& deviceContext)
 {
 	deviceContext->IASetInputLayout(vsTexture.GetInputLayout());
-	deviceContext->VSSetShader(vsTexture.GetShader(), NULL, 0);
 	deviceContext->PSSetShader(psTexture.GetShader(), NULL, 0);
-}
-
-void ShaderClass::RenderColor(Microsoft::WRL::ComPtr<ID3D11DeviceContext>& deviceContext)
-{
-	deviceContext->IASetInputLayout(vsColor.GetInputLayout());
-	deviceContext->VSSetShader(vsColor.GetShader(), NULL, 0);
-	deviceContext->PSSetShader(psColor.GetShader(), NULL, 0);
+	deviceContext->VSSetShader(vsTexture.GetShader(), NULL, 0);
 }

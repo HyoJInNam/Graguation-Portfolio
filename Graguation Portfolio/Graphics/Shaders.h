@@ -30,10 +30,6 @@ private:
 	Microsoft::WRL::ComPtr<ID3D10Blob> shader_buffer;
 };
 
-struct ShaderType {
-	VertexShader vertexshader;
-	PixelShader pixelshader;
-};
 
 class ShaderClass
 {
@@ -42,7 +38,7 @@ public:
 	void RenderShader_Light(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
 	void RenderShader_noLight(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
 	void RenderShader2D(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
-	void RenderColor(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
+	void RenderTerrain(Microsoft::WRL::ComPtr<ID3D11DeviceContext>&  deviceContext);
 
 private:
 	VertexShader vertexshader;
@@ -52,7 +48,4 @@ private:
 private:
 	VertexShader vsTexture;
 	PixelShader psTexture;
-public:
-	VertexShader vsColor;
-	PixelShader psColor;
 };
