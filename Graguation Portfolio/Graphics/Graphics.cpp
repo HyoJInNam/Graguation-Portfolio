@@ -52,7 +52,7 @@ void Graphics::RenderFrame()
 	}
 	{
 		RenderShader2D(deviceContext);
-		//sprite->getComponent<Sprite>()->Draw(canvas->getComponent<Canvas>()->GetWorldMatrix() * canvas->getComponent<Canvas>()->GetOrthoMatrix());
+		sprite->getComponent<Sprite>()->Draw(canvas->getComponent<Canvas>()->GetWorldMatrix() * canvas->getComponent<Canvas>()->GetOrthoMatrix());
 	}
 
 	//Draw Text->
@@ -118,10 +118,10 @@ bool Graphics::InitializeScene()
 
 		MainCamera->setPosition(XMFLOAT3(0, 10, -5));
 
-		//canvas = new GameObject("Canvas", nullptr, "Canvas");
-		//gameobjectList.push_back(canvas);
-		//canvas->addComponent<Canvas>();
-		//canvas->getComponent<Canvas>()->SetProjectionValues(windowWidth, windowHeight, 0.0f, 1.0f);
+		canvas = new GameObject("Canvas", nullptr, "Canvas");
+		gameobjectList.push_back(canvas);
+		canvas->addComponent<Canvas>();
+		canvas->getComponent<Canvas>()->SetProjectionValues(windowWidth, windowHeight, 0.0f, 1.0f);
 
 
 		//Load Texture
@@ -136,11 +136,10 @@ bool Graphics::InitializeScene()
 
 
 
-
-		//sprite = new GameObject("Sprite", nullptr, "Sprite");
-		//sprite->addComponent<Sprite>();
-		//if (!sprite->getComponent<Sprite>()->Initialize(device.Get(), deviceContext.Get(), 256, 256, "Data/Textures/HeightMap256.png", cb_vs_vertexshader_2d))
-		//	return false;
+		sprite = new GameObject("Sprite", nullptr, "Sprite");
+		sprite->addComponent<Sprite>();
+		if (!sprite->getComponent<Sprite>()->Initialize(device.Get(), deviceContext.Get(), 256, 256, "Data/Textures/HeightMap256.png", cb_vs_vertexshader_2d))
+			return false;
 
 		//GameObject* terrain = new GameObject("Terrain", nullptr, "Terrain");
 		//gameobjectList.push_back(terrain);
@@ -170,28 +169,27 @@ bool Graphics::InitializeScene()
 		terrain->addComponent<Terrain>();
 		if (!terrain->getComponent<Terrain>()->Initialize(device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
 			return false;
-		//terrain->setScale(XMFLOAT3(10.0f, 10.0f, 10.0f));
+		terrain->setScale(XMFLOAT3(10.0f, 10.0f, 10.0f));
 
-		//GameObject* MartianCityColony = new GameObject("MartianCityColony", nullptr, "gameObject");
-		//gameobjectList.push_back(MartianCityColony);
-		//MartianCityColony->addComponent<Renderer>();
-		//if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\\MartianCityColony\\city colony.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-		//	return false;
-		//MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
+		GameObject* MartianCityColony = new GameObject("MartianCityColony", nullptr, "gameObject");
+		gameobjectList.push_back(MartianCityColony);
+		MartianCityColony->addComponent<Renderer>();
+		if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\\MartianCityColony\\city colony.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+			return false;
+		MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
 
-		//GameObject* MartianCityColony = new GameObject("Center city Sci-Fi", nullptr, "gameObject");
-		//gameobjectList.push_back(MartianCityColony);
-		//MartianCityColony->addComponent<Renderer>();
-		//if (!MartianCityColony->getComponent<Renderer>()->Initialize("Data\\Objects\\Center city Sci-Fi\\Center City Sci-Fi.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-		//	return false;
-		//MartianCityColony->setPosition(XMFLOAT3(0, -23, 77));
+		GameObject* CityScifi = new GameObject("Center city Sci-Fi", nullptr, "gameObject");
+		gameobjectList.push_back(CityScifi);
+		CityScifi->addComponent<Renderer>();
+		if (!CityScifi->getComponent<Renderer>()->Initialize("Data\\Objects\\Center city Sci-Fi\\Center City Sci-Fi.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+			return false;
+		CityScifi->setPosition(XMFLOAT3(0, -23, 77));
 
-
-		//GameObject* gameObject = new GameObject("gameObject", nullptr, "gameObject");
-		//gameobjectList.push_back(gameObject);
-		//gameObject->addComponent<Renderer>();
-		//if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
-		//	return false;
+		GameObject* gameObject = new GameObject("gameObject", nullptr, "gameObject");
+		gameobjectList.push_back(gameObject);
+		gameObject->addComponent<Renderer>();
+		if (!gameObject->getComponent<Renderer>()->Initialize("Data\\Objects\\Nanosuit\\Nanosuit.obj", device.Get(), deviceContext.Get(), DirectionLight->getComponent<Light>()))
+			return false;
 	}
 	catch (COMException & exception)
 	{

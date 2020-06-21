@@ -22,8 +22,8 @@ public:
 	GameObject* DirectionLight;
 	GameObject* sphere1;
 	GameObject* terrain;
-	//GameObject* canvas;
-	//GameObject* sprite;
+	GameObject* canvas;
+	GameObject* sprite;
 
 private:
 	ConstantBuffer<CB_VS_vertexshader_2d> cb_vs_vertexshader_2d;

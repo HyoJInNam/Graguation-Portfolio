@@ -13,11 +13,11 @@ void Transform::Container()
 {
 	if (ImGui::TreeNode("Transform"))
 	{
-		ImGui::DragFloat3("position", (float*)&pos, 0.1f, -100.0f, 100.0f);
+		ImGui::DragFloat3("position", (float*)&pos, 0.1f, -1000.0f, 1000.0f);
 		ImGui::DragFloat3("rotation", (float*)&rot, 0.1f, -360.0f, 360.0f);
 		//ImGui::InputFloat3("position", (float*)&pos);
 		//ImGui::InputFloat3("rotation", (float*)&rot);
-		ImGui::InputFloat3("scale", (float*)&scl);// , 0.1f, 0.0f, 100.0f);
+		ImGui::DragFloat3("scale", (float*)&scl, 0.1f, 0.0f, 100.0f);
 		this->UpdateMatrix();
 		ImGui::TreePop();
 	}

@@ -5,7 +5,7 @@ class Camera : public Component
 {
 
 public:
-	float cameraMoveSpeed = 0.006f;
+	float cameraMoveSpeed = 0.1f;
 	float cameraWheelpeed = 0.6f;
 	Camera(GameObject* go);
 	virtual void Container() override;

@@ -116,12 +116,12 @@ void ImGuiClass::DebugConsol()
 {
 	ImGui::Begin("Consol", 0, ImGuiWindowFlags_NoTitleBar);
 	ImGui::BeginTabBar("Debug", ImGuiTabBarFlags_FittingPolicyScroll);
-	ImGui::BeginTabItem("Debug");
-	for (auto file : GOR_file_toString)
-	{
-		ImGui::Text(file.first.c_str());
-	}
-	ImGui::EndTabItem();
+	//ImGui::BeginTabItem("Debug");
+	////for (auto file : GOR_file_toString)
+	////{
+	////	ImGui::Text(file.first.c_str());
+	////}
+	//ImGui::EndTabItem();
 	ImGui::EndTabBar();
 	ImGui::End();
 }
